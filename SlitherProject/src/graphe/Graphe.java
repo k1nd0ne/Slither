@@ -103,20 +103,32 @@ public class Graphe implements MouseListener{
 		Sommet s = new Sommet(40,40);
 		Sommet s2 = new Sommet(40,60);
 		Sommet s3 = new Sommet(40,80);
+		Sommet s4 = new Sommet(60,60);
+		Sommet s5 = new Sommet(60,80);
 		Arc a1 = new Arc (s,s2);
 		Arc a2 = new Arc(s2, s3);
 		Arc a3 = new Arc(s0,s);
 		Arc a4 = new Arc(s0,s2);
+		Arc b1 = new Arc (s0,s4);
+		Arc b2 = new Arc(s2, s4);
+		Arc b3 = new Arc(s4,s5);
+		Arc b4 = new Arc(s3,s5);
 		
 		g.addS(s);
 		g.addS(s0);
 		g.addS(s2);
 		g.addS(s3);
+		g.addS(s4);
+		g.addS(s5);
 		
 		g.addA(a1);
 		g.addA(a2);
 		g.addA(a3);
 		g.addA(a4);
+		g.addA(b1);
+		g.addA(b2);
+		g.addA(b3);
+		g.addA(b4);
 		
 		
 		JFrame fenetre = new JFrame();

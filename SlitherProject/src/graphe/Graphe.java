@@ -130,6 +130,4 @@ public class Graphe{
 		System.out.println("graphe fermé !");
 		g.render(gt);
 	}
-	
-
 }

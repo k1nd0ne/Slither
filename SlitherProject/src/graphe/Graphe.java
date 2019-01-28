@@ -3,13 +3,12 @@ package graphe;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Graphe implements MouseListener{
+public class Graphe{
 	ArrayList<Sommet> sommets;
 	ArrayList<Arc> arcs;
 	Sommet sommetCourant;
@@ -59,8 +58,7 @@ public class Graphe implements MouseListener{
 		}
 	}
 	
-	@Override
-	public void mouseClicked(MouseEvent e) {
+	public boolean gstMouseEvent(MouseEvent e) {
 		ArrayList<Sommet> sommetsAccessibles = getSommetsAccessibles();
 		int xMouse = e.getX();
 		int yMouse = e.getY();
@@ -74,28 +72,13 @@ public class Graphe implements MouseListener{
 		}
 		if(res != null) {
 			this.setSommetCourant(res);
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	public static void main(String[] args) {
 		Graphe g = new Graphe();
 		
@@ -136,7 +119,6 @@ public class Graphe implements MouseListener{
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pan = new JPanel();
-		pan.addMouseListener(g);
 		pan.setBackground(Color.WHITE);
 		fenetre.setContentPane(pan);
 		

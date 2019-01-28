@@ -148,6 +148,4 @@ public class Graphe implements MouseListener{
 		System.out.println("graphe fermé !");
 		g.render(gt);
 	}
-	
-
 }

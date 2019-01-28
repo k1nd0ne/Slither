@@ -93,7 +93,7 @@ public class Game implements MouseListener{
 			Joueur temp = joueurCourant;
 			joueurCourant = adversaire;
 			adversaire = temp;
-			render();
+			//render();
 		}
 	}
 

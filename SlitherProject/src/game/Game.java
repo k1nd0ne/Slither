@@ -6,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import graphe.Arc;
@@ -24,12 +25,12 @@ public class Game implements MouseListener{
 		this.g = new Graphe();
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
-		Sommet s0 = new Sommet(60,40);
-		Sommet s = new Sommet(40,40);
-		Sommet s2 = new Sommet(40,60);
-		Sommet s3 = new Sommet(40,80);
-		Sommet s4 = new Sommet(60,60);
-		Sommet s5 = new Sommet(60,80);
+		Sommet s0 = new Sommet(180,120);
+		Sommet s = new Sommet(120,120);
+		Sommet s2 = new Sommet(120,180);
+		Sommet s3 = new Sommet(120,240);
+		Sommet s4 = new Sommet(180,180);
+		Sommet s5 = new Sommet(180,240);
 		Arc a1 = new Arc (s,s2);
 		Arc a2 = new Arc(s2, s3);
 		Arc a3 = new Arc(s0,s);
@@ -59,7 +60,6 @@ public class Game implements MouseListener{
 		fenetre = new JFrame();
 		fenetre.setSize(500,500);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		pan = new JPanel();
 		pan.setBackground(Color.WHITE);
 		fenetre.setContentPane(pan);
@@ -72,10 +72,11 @@ public class Game implements MouseListener{
 		render();
 	}
 	public void play() {
+		render();
 		while(!g.estFerme()) {
-			System.out.println(g.getSommetsAccessibles());
+			//System.out.println(g.getSommetsAccessibles());
 			joueurCourant.play();
-			render();
+			
 		}
 	}
 	public void render() {
@@ -93,7 +94,8 @@ public class Game implements MouseListener{
 			Joueur temp = joueurCourant;
 			joueurCourant = adversaire;
 			adversaire = temp;
-			//render();
+			render();
+			
 		}
 	}
 
@@ -122,6 +124,7 @@ public class Game implements MouseListener{
 	}
 	public static void main(String[] args) {
 		Game g = new Game();
+		g.render();
 		g.play();
 		System.out.println("jeu fini");
 	}

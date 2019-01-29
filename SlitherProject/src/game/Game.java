@@ -126,6 +126,7 @@ public class Game implements MouseListener{
 		Game g = new Game();
 		g.render();
 		g.play();
+	                  
 		System.out.println("jeu fini");
 	}
 }

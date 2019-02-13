@@ -51,7 +51,7 @@ public class Graphe{
 	}
 	public void render(Graphics g) {
 		ArrayList<Sommet> sommetsAccessibles = getSommetsAccessibles();
-		for(Arc a: arcs) {
+		for(Arc a: arcs){
 			a.render(g);
 		}
 		for(Sommet s: sommets) {
@@ -84,22 +84,23 @@ public class Graphe{
 	public void randomize() {
 		int NBSOMMETMAX = 10; 
 		int nbSommet = (int)(Math.random() * NBSOMMETMAX) + 1;
-		Sommet s = new Sommet(((int)Math.random()*400) + 1,((int)Math.random()*400)+1);
+		Sommet s = new Sommet((int)(Math.random() * (400))+1,(int) (Math.random() * (300))+100);
 		this.addS(s);
 		int tailleS = 0;
 		int index = 0;
-		Sommet i = null; 
 		Arc a = null; 
 		while(nbSommet > 0) {
 			tailleS = sommets.size();
-			i = new Sommet((int) (Math.random() * (400))+1,(int) (Math.random() * (400))+1);
-			sommets.add(i);
-			System.out.println(i);
-			a = new Arc(sommets.get(index),i);
+			s = new Sommet((int) (Math.random() * (400))+1,(int) (Math.random() * (300))+100);
+			this.addS(s);
+			a = new Arc(sommets.get(index),s);
+			System.out.println(s);
 			index = (int)(Math.random()*tailleS)+1;
 			if(NoInArc(a)) {
-				arcs.add(a);
+				this.addA(a);
+				
 				nbSommet--;
+				
 			}
 			
 		}

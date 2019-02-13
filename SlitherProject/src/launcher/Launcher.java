@@ -30,12 +30,10 @@ public class Launcher {
 		menu.add(menuItem);
 		
 		menuItem.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Game g = new Game(); 
 				g.render();
-				 
 			}
 		});
 		
@@ -47,8 +45,6 @@ public class Launcher {
 		fenetre.setContentPane(panel);
 		menuBar.add(menu);
 		fenetre.add(menuBar);
-		JLabel titre = new JLabel("---SLITHER GAME---");
-		fenetre.getContentPane().add(titre);
 		fenetre.setVisible(true);	
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}

@@ -10,7 +10,9 @@ public class GrapheBiparti extends Graphe{
 		this.A = new ArrayList<Sommet>(); 
 		this.B = new ArrayList<Sommet>();	
 	}
-	
+	//Il faut qu'il y'en ai moins dans A donc on echange si ça va pas
+	//on randomize des sommets dans A et dans B
+	//On relie des arete au hasard da A vers B
 	public void randomize() {
 		int NBSOMMETMAX = 10; 
 		int nbSommet = (int)(Math.random() * NBSOMMETMAX) + 1;

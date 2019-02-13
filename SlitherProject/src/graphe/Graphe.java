@@ -95,8 +95,8 @@ public class Graphe{
 			i = new Sommet((int) (Math.random() * (400))+1,(int) (Math.random() * (400))+1);
 			sommets.add(i);
 			System.out.println(i);
-			index = (int)Math.random()*tailleS;
-			a = new Arc(sommets.get(index),i); 
+			a = new Arc(sommets.get(index),i);
+			index = (int)(Math.random()*tailleS)+1;
 			if(NoInArc(a)) {
 				arcs.add(a);
 				nbSommet--;

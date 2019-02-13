@@ -33,7 +33,9 @@ public class Launcher {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				Game g = new Game(); 
+				g.render();
+				g.play(); 
 			}
 		});
 		

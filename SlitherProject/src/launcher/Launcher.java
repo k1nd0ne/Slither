@@ -35,7 +35,7 @@ public class Launcher {
 			public void actionPerformed(ActionEvent e) {
 				Game g = new Game(); 
 				g.render();
-				g.play(); 
+				 
 			}
 		});
 		

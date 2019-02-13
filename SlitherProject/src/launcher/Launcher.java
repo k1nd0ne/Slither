@@ -33,7 +33,6 @@ public class Launcher {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Thread(new Game()).start();
 				
 			}
 		});

@@ -105,7 +105,7 @@ public class Graphe{
 		}
 	}
 	
-	private boolean NoInArc(Arc a) {
+	protected boolean NoInArc(Arc a) {
 		for(Arc b : arcs) {
 			if(a.getS1() == b.getS1() && a.getS2() == b.getS2()) {
 				return false;

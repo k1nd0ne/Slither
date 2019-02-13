@@ -25,40 +25,7 @@ public class Game implements MouseListener{
 		this.g = new Graphe();
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
-		Sommet s0 = new Sommet(180,120);
-		Sommet s = new Sommet(120,120);
-		Sommet s2 = new Sommet(120,180);
-		Sommet s3 = new Sommet(120,240);
-		Sommet s4 = new Sommet(180,180);
-		Sommet s5 = new Sommet(180,240);
-		
-		Arc a1 = new Arc (s,s2);
-		Arc a2 = new Arc(s2, s3);
-		Arc a3 = new Arc(s0,s);
-		Arc a4 = new Arc(s0,s2);
-		Arc b1 = new Arc (s0,s4);
-		Arc b2 = new Arc(s2, s4);
-		Arc b3 = new Arc(s4,s5);
-		Arc b4 = new Arc(s3,s5);	
-		
-		g.addS(s);
-		g.addS(s0);
-		g.addS(s2);
-		g.addS(s3);
-		g.addS(s4);
-		g.addS(s5);
-		
-		g.addA(a1);
-		g.addA(a2);
-		g.addA(a3);
-		g.addA(a4);
-		
-		g.addA(b1);
-		g.addA(b2);
-		g.addA(b3);
-		g.addA(b4);
-		
-		
+		g.randomize();		
 		fenetre = new JFrame();
 		fenetre.setSize(500,500);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

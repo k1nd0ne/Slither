@@ -82,8 +82,7 @@ public class Graphe{
 	
 	public void randomize() {
 		
-		//Génération de sommets aléatoires
-		int NBSOMMETMAX = 20; 
+		int NBSOMMETMAX = 7; 
 		int nbSommet = 2 + (int) (Math.random() * ( NBSOMMETMAX));
 		System.out.println(nbSommet);
 		Sommet s = null;
@@ -92,9 +91,30 @@ public class Graphe{
 			System.out.println(s);
 			this.addS(s);
 		}
+	
+		int NBARETEMAX = (int)((NBSOMMETMAX) * (NBSOMMETMAX -1)/2);
+		
+		int nbAretes = 2 + (int) (Math.random() * (NBARETEMAX));
+		while(nbAretes > 0) {
+			int p1 = (int) (Math.random() * (nbSommet));
+			int p2 = (int) (Math.random() * (nbSommet));
+			Arc a = new Arc(sommets.get(p1), sommets.get(p2));
+			if(p1 != p2 && this.NoInArc(a)) {
+				this.addA(a);
+			}
+			nbAretes--;
+		}
 		
 		
-		
+	}
+	
+	private boolean NoInArc(Arc a) {
+		for(Arc b : arcs) {
+			if(a.getS1() == b.getS1() && a.getS2() == b.getS2()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	public static void main(String[] args) {

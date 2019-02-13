@@ -12,6 +12,7 @@ public class Graphe{
 	ArrayList<Sommet> sommets;
 	ArrayList<Arc> arcs;
 	Sommet sommetCourant;
+	
 	public Graphe() {
 		sommets = new ArrayList<Sommet>();
 		arcs = new ArrayList<Arc>();
@@ -66,7 +67,7 @@ public class Graphe{
 		for(Sommet s : sommetsAccessibles) {
 			int xS = s.getX();
 			int yS = s.getY();
-			if((Math.abs(yS-yMouse) <= 5) &&  (Math.abs(xS-xMouse) <= 5)) {
+			if((Math.abs(yS-yMouse) <= 5) && (Math.abs(xS-xMouse) <= 5)) {
 				res = s;
 			}
 		}
@@ -79,41 +80,26 @@ public class Graphe{
 		}
 	}
 	
+	public void randomize() {
+		
+		//Génération de sommets aléatoires
+		int NBSOMMETMAX = 20; 
+		int nbSommet = 2 + (int) (Math.random() * ( NBSOMMETMAX));
+		System.out.println(nbSommet);
+		Sommet s = null;
+		for(int i = 0; i<nbSommet;i++) {
+			s  = new Sommet((int) (Math.random() * (400)),(int) (Math.random() * (400)));
+			System.out.println(s);
+			this.addS(s);
+		}
+		
+		
+		
+	}
+	
 	public static void main(String[] args) {
 		Graphe g = new Graphe();
-		
-		Sommet s0 = new Sommet(60,40);
-		Sommet s = new Sommet(40,40);
-		Sommet s2 = new Sommet(40,60);
-		Sommet s3 = new Sommet(40,80);
-		Sommet s4 = new Sommet(60,60);
-		Sommet s5 = new Sommet(60,80);
-		Arc a1 = new Arc (s,s2);
-		Arc a2 = new Arc(s2, s3);
-		Arc a3 = new Arc(s0,s);
-		Arc a4 = new Arc(s0,s2);
-		Arc b1 = new Arc (s0,s4);
-		Arc b2 = new Arc(s2, s4);
-		Arc b3 = new Arc(s4,s5);
-		Arc b4 = new Arc(s3,s5);
-		
-		g.addS(s);
-		g.addS(s0);
-		g.addS(s2);
-		g.addS(s3);
-		g.addS(s4);
-		g.addS(s5);
-		
-		g.addA(a1);
-		g.addA(a2);
-		g.addA(a3);
-		g.addA(a4);
-		g.addA(b1);
-		g.addA(b2);
-		g.addA(b3);
-		g.addA(b4);
-		
-		
+		g.randomize();
 		JFrame fenetre = new JFrame();
 		fenetre.setSize(500,500);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

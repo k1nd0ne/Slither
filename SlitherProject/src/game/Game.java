@@ -1,9 +1,10 @@
 package game;
-
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +15,7 @@ import graphe.Graphe;
 import graphe.Sommet;
 import joueur.Joueur;
 
-public class Game implements MouseListener{
+public class Game implements MouseListener, Runnable{
 	private Joueur joueurCourant, adversaire;
 	private Graphe g;
 	private JFrame fenetre;
@@ -58,8 +59,9 @@ public class Game implements MouseListener{
 		g.addA(b3);
 		g.addA(b4);
 		
-		
+	
 		fenetre = new JFrame();
+		fenetre.pack();
 		fenetre.setSize(500,500);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pan = new JPanel();
@@ -68,16 +70,20 @@ public class Game implements MouseListener{
 		fenetre.setVisible(true);
 		gt = pan.getGraphics();
 		pan.addMouseListener(this);
+		
 	}
 	public void initialize() {
 		render();
 	}
 	public void play() {
 		render();
-		while(!g.estFerme()) {
+		ArrayList<Sommet> l = g.getSommetsAccessibles();
+		System.out.println("C'est à "+joueurCourant.getNom()+" de jouer");
+		while(!l.isEmpty()) {
 			joueurCourant.play();
+			l = g.getSommetsAccessibles();
 		}
-		//System.out.println(g.getSommetsAccessibles());
+		System.out.println("On est sortie de la boucle");
 	}
 	public void render() {
 		g.render(gt);
@@ -90,7 +96,6 @@ public class Game implements MouseListener{
 		if(correctlyClicked) {
 			joueurCourant.setPlaying();
 			adversaire.setPlaying();
-			
 			Joueur temp = joueurCourant;
 			joueurCourant = adversaire;
 			adversaire = temp;
@@ -128,5 +133,10 @@ public class Game implements MouseListener{
 		g.play();
 	                  
 		System.out.println("jeu fini");
+	}
+	@Override
+	public void run() {
+		render();
+		play(); 
 	}
 }

@@ -79,33 +79,30 @@ public class Graphe{
 			return false;
 		}
 	}
-	
+	//On commence avec un sommet. à chaque itération, on créer un nouveau sommet et une nouvelle arete. 
+	//On connecte l'arete créer avec le sommet créer et un sommet aléatoire de la liste de sommet.
 	public void randomize() {
-		
-		int NBSOMMETMAX = 7; 
-		int nbSommet = 2 + (int) (Math.random() * ( NBSOMMETMAX));
-		System.out.println(nbSommet);
-		Sommet s = null;
-		for(int i = 0; i<nbSommet;i++) {
-			s  = new Sommet((int) (Math.random() * (400)),(int) (Math.random() * (400)));
-			System.out.println(s);
-			this.addS(s);
-		}
-	
-		int NBARETEMAX = (int)((NBSOMMETMAX) * (NBSOMMETMAX -1)/2);
-		
-		int nbAretes = 2 + (int) (Math.random() * (NBARETEMAX));
-		while(nbAretes > 0) {
-			int p1 = (int) (Math.random() * (nbSommet));
-			int p2 = (int) (Math.random() * (nbSommet));
-			Arc a = new Arc(sommets.get(p1), sommets.get(p2));
-			if(p1 != p2 && this.NoInArc(a)) {
-				this.addA(a);
+		int NBSOMMETMAX = 10; 
+		int nbSommet = (int)(Math.random() * NBSOMMETMAX) + 1;
+		Sommet s = new Sommet(((int)Math.random()*400) + 1,((int)Math.random()*400)+1);
+		this.addS(s);
+		int tailleS = 0;
+		int index = 0;
+		Sommet i = null; 
+		Arc a = null; 
+		while(nbSommet > 0) {
+			tailleS = sommets.size();
+			i = new Sommet((int) (Math.random() * (400))+1,(int) (Math.random() * (400))+1);
+			sommets.add(i);
+			System.out.println(i);
+			index = (int)Math.random()*tailleS;
+			a = new Arc(sommets.get(index),i); 
+			if(NoInArc(a)) {
+				arcs.add(a);
+				nbSommet--;
 			}
-			nbAretes--;
+			
 		}
-		
-		
 	}
 	
 	private boolean NoInArc(Arc a) {

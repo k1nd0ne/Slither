@@ -15,7 +15,7 @@ import graphe.Graphe;
 import graphe.Sommet;
 import joueur.Joueur;
 
-public class Game implements MouseListener, Runnable{
+public class Game extends Thread implements MouseListener, Runnable {
 	private Joueur joueurCourant, adversaire;
 	private Graphe g;
 	private JFrame fenetre;
@@ -39,6 +39,8 @@ public class Game implements MouseListener, Runnable{
 		fenetre.setVisible(true);
 		gt = pan.getGraphics();
 		pan.addMouseListener(this);
+		render();
+		play(); 
 		
 	}
 	public void initialize() {

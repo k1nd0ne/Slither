@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import graphe.Arc;
 import graphe.Graphe;
+import graphe.GrapheBiparti;
 import graphe.Sommet;
 import joueur.Joueur;
 
@@ -24,7 +25,7 @@ public class Game implements MouseListener{
 	private JPanelGraphe pan;
 	private Graphics gt;
 	public Game() {
-		this.g = new Graphe();
+		this.g = new GrapheBiparti();
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
 		g.randomize();		

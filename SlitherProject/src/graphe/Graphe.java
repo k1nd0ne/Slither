@@ -84,26 +84,27 @@ public class Graphe{
 	public void randomize() {
 		int NBSOMMETMAX = 10; 
 		int nbSommet = (int)(Math.random() * NBSOMMETMAX) + 1;
-		Sommet s = new Sommet((int)(Math.random() * (400))+1,(int) (Math.random() * (300))+100);
-		this.addS(s);
-		int tailleS = 0;
-		int index = 0;
-		Arc a = null; 
-		while(nbSommet > 0) {
-			tailleS = sommets.size();
-			s = new Sommet((int) (Math.random() * (400))+1,(int) (Math.random() * (300))+100);
-			this.addS(s);
-			a = new Arc(sommets.get(index),s);
-			System.out.println(s);
-			index = (int)(Math.random()*tailleS)+1;
-			if(NoInArc(a)) {
+		
+		
+		for(int i=0;i<nbSommet;i++) {
+			this.addS(new Sommet((int)(Math.random() * (400))+1,(int) (Math.random() * (300))+100));
+		}
+		System.out.println("ok");
+		System.out.println(sommets.size());
+			int i1 = 0;
+			int i2 = 0; 
+			Arc a = null;
+			while(nbSommet>0) {
+				i1 = (int)Math.random()*nbSommet; 
+				i2 = (int)Math.random()*nbSommet;
+				a = new Arc(sommets.get(i1),sommets.get(i2));
 				this.addA(a);
-				
 				nbSommet--;
+				System.out.println(arcs);
 				
 			}
 			
-		}
+			
 	}
 	
 	protected boolean NoInArc(Arc a) {

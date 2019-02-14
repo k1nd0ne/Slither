@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -81,46 +82,31 @@ public class Graphe{
 	}
 	//On commence avec un sommet. à chaque itération, on créer un nouveau sommet et une nouvelle arete. 
 	//On connecte l'arete créer avec le sommet créer et un sommet aléatoire de la liste de sommet.
-	public void randomize() {
+	public void randomize(int width, int height) {
+		Random r = new Random();
 		int NBSOMMETMAX = 10; 
-		int nbSommet = (int)(Math.random() * NBSOMMETMAX) + 1;
+		int nbSommet = r.nextInt(NBSOMMETMAX) + 1;
 		
 		
 		for(int i=0;i<nbSommet;i++) {
-			this.addS(new Sommet((int)(Math.random() * (400))+1,(int) (Math.random() * (300))+100));
+			this.addS(new Sommet(r.nextInt(width),r.nextInt(height)));
 		}
-		System.out.println("ok");
-		System.out.println(sommets.size());
-			int i1 = 0;
-			int i2 = 0; 
-			Arc a = null;
-			while(nbSommet>0) {
-				i1 = (int)Math.random()*nbSommet; 
-				i2 = (int)Math.random()*nbSommet;
-				a = new Arc(sommets.get(i1),sommets.get(i2));
-				this.addA(a);
-				nbSommet--;
-				System.out.println(arcs);
-				
-			}
-			
-			
-	}
-	
-	protected boolean NoInArc(Arc a) {
-		for(Arc b : arcs) {
-			if(a.getS1() == b.getS1() && a.getS2() == b.getS2()) {
-				return false;
-			}
+		int i1;
+		int i2; 
+		Arc a;
+		for(int i=0; i<nbSommet; i++) {
+			i1 = r.nextInt(nbSommet);
+			i2 = r.nextInt(nbSommet);
+			a = new Arc(sommets.get(i1),sommets.get(i2));
+			this.addA(a);
 		}
-		return true;
 	}
 	
 	public static void main(String[] args) {
 		Graphe g = new Graphe();
-		g.randomize();
 		JFrame fenetre = new JFrame();
 		fenetre.setSize(500,500);
+		g.randomize(fenetre.getWidth(), fenetre.getHeight());
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pan = new JPanel();

@@ -1,6 +1,5 @@
 package game;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,12 +9,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-import graphe.Arc;
 import graphe.Graphe;
-import graphe.GrapheBiparti;
-import graphe.Sommet;
 import joueur.Joueur;
 
 public class Game implements MouseListener{
@@ -24,11 +19,10 @@ public class Game implements MouseListener{
 	private JFrame fenetre;
 	private JPanelGraphe pan;
 	private Graphics gt;
-	public Game() {
-		this.g = new GrapheBiparti();
+	public Game(Graphe g) {
+		this.g = g;
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
-		g.randomize();		
 		fenetre = new JFrame();
 		fenetre.setSize(500,500);
 		pan = new JPanelGraphe(g);
@@ -36,6 +30,7 @@ public class Game implements MouseListener{
 		fenetre.setVisible(true);
 		gt = pan.getGraphics();
 		pan.addMouseListener(this);
+		g.randomize(pan.getWidth(), pan.getHeight());		
 	}
 	public void render() {
 		g.render(gt);
@@ -55,7 +50,7 @@ public class Game implements MouseListener{
 			render();
 			if(g.estFerme()) {
 				String gagnant = joueurCourant.getNom();
-				JLabel titre = new JLabel("JEUX FINIS : "+gagnant+ " gagne !");
+				JLabel titre = new JLabel("JEU FINI : "+gagnant+ " gagne !");
 				JButton b1 = new JButton("Quitter");
 				fenetre.getContentPane().add(titre);
 				fenetre.getContentPane().add(b1);
@@ -98,7 +93,7 @@ public class Game implements MouseListener{
 		
 	}
 	public static void main(String[] args) {
-		Game g = new Game();
+		Game g = new Game(new Graphe());
 		g.render();     
 		System.out.println("jeu fini");
 	}

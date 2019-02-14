@@ -1,6 +1,8 @@
 package graphe;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GrapheBiparti extends Graphe{
 	private ArrayList<Sommet> A;
@@ -13,15 +15,11 @@ public class GrapheBiparti extends Graphe{
 		this.sommets = A;
 		this.sommets.addAll(B);
 	}
-	//Il faut qu'il y'en ai moins dans A donc on echange si ça va pas
-	//on randomize des sommets dans A et dans B
-	//On relie des arete au hasard da A vers B
 	public void randomize() {
+		Random r = new Random();
 		int NBSOMMETMAX = 10;
-		
-		int nbSommet1 = ((int)Math.random()*NBSOMMETMAX)+1;
-		int nbSommet2 = ((int)Math.random()*NBSOMMETMAX)+1;
-		int nbSommet = 100;
+		int nbSommet1 = r.nextInt(NBSOMMETMAX) + 1;
+		int nbSommet2 = r.nextInt(NBSOMMETMAX) + 1;
 		if(nbSommet1 > nbSommet2) {
 			int aux = nbSommet1; 
 			nbSommet1 = nbSommet2;
@@ -29,20 +27,20 @@ public class GrapheBiparti extends Graphe{
 		}
 		
 		for(int i =0; i<nbSommet1;i++) {
-			A.add(new Sommet((int)(Math.random() * (400))+1,(int) (Math.random() * (300))+100));
+			A.add(new Sommet((int)(Math.round(Math.random() * 400) + 1),(int)(Math.round(Math.random() * 300) + 100)));
 		}
 		for(int i =0; i<nbSommet2;i++) {
-			B.add(new Sommet((int)(Math.random() * (400))+1,(int) (Math.random() * (300))+100));
+			B.add(new Sommet((int)(Math.round(Math.random() * 400) + 1),(int)(Math.round(Math.random() * 300) + 100)));
 		}
-		int nbArc = ((int)Math.random()*((nbSommet*(nbSommet - 1))/2))+1;
+		int nbArc = (int) (Math.round(Math.random() * 10 )+ 1);
 		int i,j = 0;
 		Arc a = null;
 		while(nbArc > 0) {
-			i = (int)Math.random()*nbSommet1;
-			j = (int)Math.random()*nbSommet2;
+			i = ThreadLocalRandom.current().nextInt(0, nbSommet1);
+			j = ThreadLocalRandom.current().nextInt(0, nbSommet2);
 			a = new Arc(A.get(i), B.get(j));
-				arcs.add(a);
-				nbArc--;
+					arcs.add(a);
+					nbArc--;
 			
 		}
 		

@@ -76,8 +76,6 @@ public class Launcher {
 		
 		
 		
-		
-		
 		fenetre = new JFrame("Menu principal");
 		fenetre.setSize(300, 400);
 		fenetre.setResizable(false);

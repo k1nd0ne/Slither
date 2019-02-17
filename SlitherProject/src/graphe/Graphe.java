@@ -10,11 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Graphe{
-	ArrayList<Sommet> sommets;
-	ArrayList<Arc> arcs;
-	Sommet sommetCourant;
-	
-	public Graphe() {
+	protected ArrayList<Sommet> sommets;
+	protected ArrayList<Arc> arcs;
+	protected Sommet sommetCourant;
+	protected int nbSommet;
+	public Graphe(int nbSommet) {
+		this.nbSommet = nbSommet; 
 		sommets = new ArrayList<Sommet>();
 		arcs = new ArrayList<Arc>();
 		sommetCourant = null;
@@ -82,28 +83,60 @@ public class Graphe{
 	}
 	//On commence avec un sommet. à chaque itération, on créer un nouveau sommet et une nouvelle arete. 
 	//On connecte l'arete créer avec le sommet créer et un sommet aléatoire de la liste de sommet.
-	public void randomize(int width, int height) {
+	protected void randomizeSommets(int width, int height){
 		Random r = new Random();
-		int NBSOMMETMAX = 10; 
-		int nbSommet = r.nextInt(NBSOMMETMAX) + 1;
-		
-		
 		for(int i=0;i<nbSommet;i++) {
-			this.addS(new Sommet(r.nextInt(width),r.nextInt(height)));
+			this.addS(new Sommet(r.nextInt(width),r.nextInt(height)+100));
+		}
+	}
+	
+	
+	
+	protected void randomizeArc() {
+		Random r = new Random();
+		ArrayList<Integer> comp = new ArrayList<Integer>();
+		
+		for(int i = 0; i<sommets.size(); i++) {
+			comp.add(i);
 		}
 		int i1;
+		int aux;
 		int i2; 
 		Arc a;
-		for(int i=0; i<nbSommet; i++) {
+		while(!estConnexe(comp)) {
 			i1 = r.nextInt(nbSommet);
 			i2 = r.nextInt(nbSommet);
 			a = new Arc(sommets.get(i1),sommets.get(i2));
 			this.addA(a);
+			if(!comp.get(i1).equals(comp.get(i2))) {
+				aux = comp.get(i2);
+				for(int j = 0; j< comp.size(); j++) {
+					if(comp.get(j).equals(aux)) {
+						comp.set(j, comp.get(i1));
+					}
+				}
+			}
+			
+
 		}
 	}
 	
+	public void randomize(int width, int height) {
+		randomizeSommets(width, height);
+		randomizeArc();
+	}
+	protected boolean estConnexe(ArrayList<Integer> comp) {
+		for(int i=0; i<comp.size()-1;i++) {
+			if(!comp.get(i).equals(comp.get(i+1))) {
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
 	public static void main(String[] args) {
-		Graphe g = new Graphe();
+		Graphe g = new Graphe(10);
 		JFrame fenetre = new JFrame();
 		fenetre.setSize(500,500);
 		g.randomize(fenetre.getWidth(), fenetre.getHeight());

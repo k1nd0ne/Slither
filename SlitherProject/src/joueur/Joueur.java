@@ -1,5 +1,8 @@
 package joueur;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 public class Joueur {
 
 	private String nom;
@@ -20,5 +23,14 @@ public class Joueur {
 		return nom;
 	}
 
-	
+	public String toString() {
+		return this.getNom();
+	}
+
+	public void render(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.clearRect(100, 8, 200,15);
+		g.drawString("C'est à "+getNom()+" de jouer !", 100, 20);
+		
+	}
 }

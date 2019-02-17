@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,25 +16,30 @@ import joueur.Joueur;
 
 public class Game implements MouseListener{
 	private Joueur joueurCourant, adversaire;
-	private Graphe g;
+	protected Graphe g;
 	private JFrame fenetre;
-	private JPanelGraphe pan;
+	protected JPanelGraphe pan;
 	private Graphics gt;
-	public Game(Graphe g) {
-		this.g = g;
+	public Game() {
+		this.g = new Graphe(10);
+		
+	}
+	public void init() {
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
 		fenetre = new JFrame();
-		fenetre.setSize(500,500);
-		pan = new JPanelGraphe(g);
+		fenetre.setSize(900,900);
+		fenetre.setResizable(false);
+		pan = new JPanelGraphe(g,joueurCourant);
 		fenetre.setContentPane(pan);
 		fenetre.setVisible(true);
 		gt = pan.getGraphics();
 		pan.addMouseListener(this);
-		g.randomize(pan.getWidth(), pan.getHeight());		
+		g.randomize(pan.getWidth(), pan.getHeight()-200);
 	}
 	public void render() {
 		g.render(gt);
+		joueurCourant.render(gt);
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -43,26 +49,26 @@ public class Game implements MouseListener{
 		if(correctlyClicked) {
 			joueurCourant.setPlaying();
 			adversaire.setPlaying();
-			
 			Joueur temp = joueurCourant;
 			joueurCourant = adversaire;
 			adversaire = temp;
+			pan.setJoueur(joueurCourant);
 			render();
 			if(g.estFerme()) {
-				String gagnant = joueurCourant.getNom();
-				JLabel titre = new JLabel("JEU FINI : "+gagnant+ " gagne !");
+				String gagnant = adversaire.getNom();
+				gt.setColor(Color.BLACK);
+				gt.clearRect(100, 8, 200,15);
+				gt.drawString("JEU FINI : "+gagnant+ " gagne !", 100, 20);
 				JButton b1 = new JButton("Quitter");
-				fenetre.getContentPane().add(titre);
 				fenetre.getContentPane().add(b1);
+				b1.setBounds(10, 850, 100, 30);
 				b1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						fenetre.setVisible(false);
 					}
 				});
-				fenetre.setVisible(true);
-				gt = pan.getGraphics();
-				render();
+
 			}
 			
 			
@@ -93,7 +99,7 @@ public class Game implements MouseListener{
 		
 	}
 	public static void main(String[] args) {
-		Game g = new Game(new Graphe());
+		Game g = new Game();
 		g.render();     
 		System.out.println("jeu fini");
 	}

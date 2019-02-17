@@ -2,47 +2,67 @@ package graphe;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+
 
 public class GrapheBiparti extends Graphe{
-	private ArrayList<Sommet> A;
-	private ArrayList<Sommet> B ; 
-	public GrapheBiparti() {
-		super(); 
+	protected int nbSommetA;
+	protected int nbSommetB;
+	protected ArrayList<Sommet> A;
+	protected ArrayList<Sommet> B ; 
+	public GrapheBiparti(int nbSommetA,int nbSommetB) {
+		super(nbSommetB+nbSommetA); 
+		if(nbSommetA > nbSommetB) {
+			int aux = nbSommetA; 
+			nbSommetA = nbSommetB;
+			nbSommetB = aux;
+		}
+		this.nbSommetA = nbSommetA; 
+		this.nbSommetB = nbSommetB;
 		this.A = new ArrayList<Sommet>(); 
 		this.B = new ArrayList<Sommet>();
-		randomize();
-		this.sommets = A;
-		this.sommets.addAll(B);
 	}
-	public void randomize() {
+	protected void randomizeSommets(int width, int height){
+		
 		Random r = new Random();
-		int NBSOMMETMAX = 10;
-		int nbSommet1 = r.nextInt(NBSOMMETMAX) + 1;
-		int nbSommet2 = r.nextInt(NBSOMMETMAX) + 1;
-		if(nbSommet1 > nbSommet2) {
-			int aux = nbSommet1; 
-			nbSommet1 = nbSommet2;
-			nbSommet2 = aux;
+		for(int i =0; i<nbSommetA;i++) {
+			Sommet s = new Sommet(r.nextInt(width),r.nextInt(height)+100);
+			this.addS(s);
+			A.add(s);
 		}
 		
-		for(int i =0; i<nbSommet1;i++) {
-			A.add(new Sommet((int)(Math.round(Math.random() * 400) + 1),(int)(Math.round(Math.random() * 300) + 100)));
+		for(int i=0; i<nbSommetB;i++) {
+			Sommet s = new Sommet(r.nextInt(width),r.nextInt(height)+100);
+			this.addS(s);
+			B.add(s);
 		}
-		for(int i =0; i<nbSommet2;i++) {
-			B.add(new Sommet((int)(Math.round(Math.random() * 400) + 1),(int)(Math.round(Math.random() * 300) + 100)));
+	}
+	
+	
+	protected void randomizeArc() {
+		Random r = new Random();
+		ArrayList<Integer>comp = new ArrayList<Integer>();
+		for(int i= 0; i<sommets.size();i++) {
+			comp.add(i);
 		}
-		int nbArc = (int) (Math.round(Math.random() * 10 )+ 1);
-		int i,j = 0;
-		Arc a = null;
-		while(nbArc > 0) {
-			i = ThreadLocalRandom.current().nextInt(0, nbSommet1);
-			j = ThreadLocalRandom.current().nextInt(0, nbSommet2);
-			a = new Arc(A.get(i), B.get(j));
-					arcs.add(a);
-					nbArc--;
+		int i1,i2,aux; 
+		Arc a; 
+		while(!estConnexe(comp)) {
+			i1 = r.nextInt(nbSommetA);
+			i2 = r.nextInt(nbSommetB);
+			a = new Arc(A.get(i1),B.get(i2));
+			this.addA(a);
+			if(!comp.get(i1).equals(comp.get(nbSommetA+i2))) {
+				aux = comp.get(nbSommetA+i2);
+				for(int j = 0; j< comp.size(); j++) {
+					if(comp.get(j).equals(aux)) {
+						comp.set(j, comp.get(i1));
+					}
+				}
+			}
 			
+
 		}
 		
 	}
+	
 }

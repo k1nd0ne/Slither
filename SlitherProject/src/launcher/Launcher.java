@@ -9,8 +9,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import game.Game;
-import graphe.Graphe;
-import graphe.GrapheBiparti;
+import game.GameAlice;
+import game.GameBiparti;
+import game.GameBob;
+
 
 
 public class Launcher {
@@ -18,21 +20,28 @@ public class Launcher {
 	private JMenu menu; 
 	private JMenuItem menuItem;
 	private JMenuItem menuItem2;
+	private JMenuItem menuItem3;
+	private JMenuItem menuItem4;
 	private JFrame fenetre;  
 	private JPanel panel; 
 	public Launcher() {
 		menuBar = new JMenuBar();
 		menuItem  = new JMenuItem("Graphe aléatoire");
 		menuItem2 = new JMenuItem("Graphe aléatoire bipartie"); 
+		menuItem3 = new JMenuItem("Graphe Gagnant pour Alice");
+		menuItem4 = new JMenuItem("Graphe Gagnant pour Bob");
 		menu = new JMenu("Nouveau...");
 		menu.add(menuItem);
 		menu.add(menuItem2);
+		menu.add(menuItem3);
+		menu.add(menuItem4);
 		menuBar.add(menu);
 		
 		menuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Game g = new Game(new Graphe()); 
+				Game g = new Game(); 
+				g.init();
 				g.render();
 			}
 		});
@@ -41,7 +50,26 @@ public class Launcher {
 		menuItem2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Game g = new Game(new GrapheBiparti()); 
+				Game g = new GameBiparti(); 
+				g.init();
+				g.render();
+			}
+		});
+		
+		menuItem3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Game g = new GameAlice(); 
+				g.init();
+				g.render();
+			}
+		});
+		
+		menuItem4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Game g = new GameBob(); 
+				g.init();
 				g.render();
 			}
 		});
@@ -51,6 +79,7 @@ public class Launcher {
 		
 		fenetre = new JFrame("Menu principal");
 		fenetre.setSize(300, 400);
+		fenetre.setResizable(false);
 		panel = new JPanel();
 		fenetre.setContentPane(panel);
 		menuBar.add(menu);

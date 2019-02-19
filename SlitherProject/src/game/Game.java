@@ -28,7 +28,7 @@ public class Game implements MouseListener{
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
 		fenetre = new JFrame();
-		fenetre.setSize(900,900);
+		fenetre.setSize(600,600);
 		fenetre.setResizable(false);
 		pan = new JPanelGraphe(g,joueurCourant);
 		fenetre.setContentPane(pan);
@@ -61,7 +61,7 @@ public class Game implements MouseListener{
 				gt.drawString("JEU FINI : "+gagnant+ " gagne !", 100, 20);
 				JButton b1 = new JButton("Quitter");
 				fenetre.getContentPane().add(b1);
-				b1.setBounds(10, 850, 100, 30);
+				b1.setBounds(10, 500, 100, 30);
 				b1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

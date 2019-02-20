@@ -103,6 +103,7 @@ public class Launcher {
 		menuItem2.setBounds(50,300,175,20);
 		menuItem3.setBounds(50,350,175,20);
 		menuItem4.setBounds(50,400,175,20);
+		quit.setBounds(120,450,50,20);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 	

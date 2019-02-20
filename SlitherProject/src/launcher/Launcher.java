@@ -1,7 +1,11 @@
 package launcher;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -16,27 +20,20 @@ import game.GameBob;
 
 
 public class Launcher {
-	private JMenuBar menuBar; 
-	private JMenu menu; 
-	private JMenuItem menuItem;
-	private JMenuItem menuItem2;
-	private JMenuItem menuItem3;
-	private JMenuItem menuItem4;
+	private JButton menuItem;
+	private JButton menuItem2;
+	private JButton menuItem3;
+	private JButton menuItem4;
+	private JButton quit;
 	private JFrame fenetre;  
 	private JPanel panel; 
 	public Launcher() {
-		menuBar = new JMenuBar();
-		menuItem  = new JMenuItem("Graphe aléatoire");
-		menuItem2 = new JMenuItem("Graphe aléatoire bipartie"); 
-		menuItem3 = new JMenuItem("Graphe Gagnant pour Alice");
-		menuItem4 = new JMenuItem("Graphe Gagnant pour Bob");
-		menu = new JMenu("Nouveau...");
-		menu.add(menuItem);
-		menu.add(menuItem2);
-		menu.add(menuItem3);
-		menu.add(menuItem4);
-		menuBar.add(menu);
 		
+		menuItem  = new JButton("Graphe aléatoire");
+		menuItem2 = new JButton("Graphe aléatoire bipartie"); 
+		menuItem3 = new JButton("Graphe Gagnant pour Alice");
+		menuItem4 = new JButton("Graphe Gagnant pour Bob");
+		quit = new JButton("Quitter");
 		menuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -74,18 +71,38 @@ public class Launcher {
 			}
 		});
 		
+		quit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fenetre.setVisible(false);
+				System.exit(0);
+			}
+		});
+
 		
 		
 		fenetre = new JFrame("Menu principal");
-		fenetre.setSize(300, 400);
+		fenetre.setSize(300, 500);
 		fenetre.setResizable(false);
 		panel = new JPanel();
 		fenetre.setContentPane(panel);
-		menuBar.add(menu);
-		fenetre.add(menuBar);
 		JLabel titre = new JLabel("SLITHER GAME");
-		fenetre.getContentPane().add(titre);
+		ImageIcon image = new ImageIcon("src/images/background.png");
+		JLabel label = new JLabel("", image, JLabel.CENTER);
+		fenetre.add(label, BorderLayout.CENTER );
+		fenetre.add(titre);	
+		fenetre.add(menuItem);
+		fenetre.add(menuItem2);
+		fenetre.add(menuItem3);
+		fenetre.add(menuItem4);
+		fenetre.add(quit);
 		fenetre.setVisible(true);	
+		label.setBounds(0,0 ,300, 200);
+		titre.setBounds(100,200 ,100, 20);
+		menuItem.setBounds(60,250,150,20);
+		menuItem2.setBounds(50,300,175,20);
+		menuItem3.setBounds(50,350,175,20);
+		menuItem4.setBounds(50,400,175,20);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		}
 	

@@ -37,9 +37,10 @@ public class GrapheGagnantBob extends GrapheBiparti {
 			else {
 				i2 = r.nextInt(nbSommetA);
 			}
-			
+			i1 = sommets.indexOf(sommetsCool.get(i1));
 			a = new Arc(sommetsCool.get(i1),sommets.get(i2));
 			this.addA(a);
+			
 			if(!comp.get(i1).equals(comp.get(i2))) {
 				aux = comp.get(i2);
 				for(int j = 0; j< comp.size(); j++) {

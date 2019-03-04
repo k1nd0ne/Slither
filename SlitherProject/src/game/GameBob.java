@@ -3,6 +3,6 @@ import graphe.GrapheGagnantBob;
 
 public class GameBob extends Game{
 	public GameBob() {
-		this.g = new GrapheGagnantBob(7);
+		this.g = new GrapheGagnantBob(18);
 	}
 }

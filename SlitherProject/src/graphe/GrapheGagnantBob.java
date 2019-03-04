@@ -3,25 +3,21 @@ package graphe;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GrapheGagnantBob extends GrapheBiparti {
+public class GrapheGagnantBob extends Graphe {
 
-	public GrapheGagnantBob(int nbSommetA) {
-		super(nbSommetA, nbSommetA);
-		}
+	public GrapheGagnantBob(int nbSommet) {
+		super(nbSommet);
+	}
 	
 	protected void randomizeArc() {
 		ArrayList<Sommet> sommetsCool = new ArrayList<Sommet>(); 
 		Random r = new Random(); 
 		Arc a;
-		int nbSommetCool = A.size() - 1; 
-		for(int i=0; i<nbSommetCool;i++) {
-			 if(i%2 == 0) {
-				 sommetsCool.add(sommets.get(i));				 
-			 }
-			 else {
-				 sommetsCool.add(sommets.get(sommets.size() -1 -i));
-			 }
-		 }
+		int nbSommetCool = sommets.size()/2; 
+		if(sommets.size()%2==0) {
+			nbSommetCool--;
+		}
+		
 		int i1,i2,aux;
 		
 		ArrayList<Integer> comp = new ArrayList<Integer>();
@@ -30,14 +26,7 @@ public class GrapheGagnantBob extends GrapheBiparti {
 		}
 		while(!estConnexe(comp)) {
 			i1 = r.nextInt(nbSommetCool);
-			if(A.contains(sommetsCool.get(i1))) {
-				i2 = r.nextInt(nbSommetB)+nbSommetA;
-				
-			}
-			else {
-				i2 = r.nextInt(nbSommetA);
-			}
-			i1 = sommets.indexOf(sommetsCool.get(i1));
+			i2 = r.nextInt(nbSommet);
 			a = new Arc(sommets.get(i1),sommets.get(i2));
 			this.addA(a);
 			

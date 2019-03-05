@@ -30,9 +30,9 @@ public class Launcher {
 	public Launcher() {
 		
 		menuItem  = new JButton("Graphe aléatoire");
-		menuItem2 = new JButton("Graphe aléatoire bipartie"); 
-		menuItem3 = new JButton("Graphe Gagnant pour Alice");
-		menuItem4 = new JButton("Graphe Gagnant pour Bob");
+		menuItem2 = new JButton("Graphe aléatoire biparti"); 
+		menuItem3 = new JButton("Graphe gagnant pour Alice");
+		menuItem4 = new JButton("Graphe gagnant pour Bob");
 		quit = new JButton("Quitter");
 		menuItem.addActionListener(new ActionListener() {
 			@Override
@@ -104,7 +104,9 @@ public class Launcher {
 		menuItem3.setBounds(50,350,175,20);
 		menuItem4.setBounds(50,400,175,20);
 		quit.setBounds(120,450,50,20);
+		
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		}
 	
 	public static void main(String args[]) {

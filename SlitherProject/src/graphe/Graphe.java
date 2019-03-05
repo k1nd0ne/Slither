@@ -81,8 +81,6 @@ public class Graphe{
 			return false;
 		}
 	}
-	//On commence avec un sommet. à chaque itération, on créer un nouveau sommet et une nouvelle arete. 
-	//On connecte l'arete créer avec le sommet créer et un sommet aléatoire de la liste de sommet.
 	protected void randomizeSommets(int width, int height){
 		Random r = new Random();
 		for(int i=0;i<nbSommet;i++) {
@@ -124,6 +122,7 @@ public class Graphe{
 	public void randomize(int width, int height) {
 		randomizeSommets(width, height);
 		randomizeArc();
+		forceBased(10,10,10,10);
 	}
 	protected boolean estConnexe(ArrayList<Integer> comp) {
 		for(int i=0; i<comp.size()-1;i++) {
@@ -134,6 +133,75 @@ public class Graphe{
 		
 		return true;
 		
+	}
+	
+	public static boolean norme(double[][] deplacement,double normeMin,int n) {
+		for(int i =0;i<n;i++) {
+			if(Math.sqrt(Math.pow(deplacement[i][0],2) + Math.pow(deplacement[i][1],2)) > normeMin) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	protected void deplacer(double tab[][]) {
+		int i = 0;
+		for (Arc a : this.arcs) {
+			a.s1.setX(a.s1.getX() - (int)tab[i][0]);
+			a.s1.setY(a.s1.getY() - (int)tab[i][0]);
+			
+			a.s2.setX(a.s2.getX() - (int)tab[i][1]);
+			a.s2.setY(a.s2.getY() - (int)tab[i][1]);
+		}
+	}
+	protected void forceBased(int k, int r,double normeMin, double l0) {
+		int n = sommets.size();
+		int m = arcs.size();
+		double[][] deplacement = new double[m][2];
+		for(int i =0;i<m;i++) {
+			deplacement[i][0] = 0;
+			deplacement[i][1] = 0;
+		}
+		
+		do {
+			this.deplacer(deplacement);
+			double dist = 0;
+			for(int i=0;i<n;i++) {
+				for(int j = 0;j<n;j++) {
+					dist = distance(sommets.get(i),sommets.get(j));
+					deplacement[i][0] += ((sommets.get(i).getX() - sommets.get(j).getX()) / dist) * (k/Math.pow(dist, 2.));
+					deplacement[i][1] += ((sommets.get(i).getY() - sommets.get(j).getY()) / dist) * (k/Math.pow(dist, 2.));
+				}
+			}
+			for(int i = 0; i< m; i++) {
+				Sommet A = arcs.get(i).s1;
+				Sommet B = arcs.get(i).s2;
+				int i1 = 0 ,i2 = 0;
+				
+				deplacement[i1][0] += ((B.getX() - A.getX()) / dist) * r*(dist-l0);
+				deplacement[i1][1] += ((B.getY() - A.getY()) / dist) * r*(dist-l0);
+				
+				Sommet Aux;
+				Aux = A;
+				A = B; 
+				B = Aux;
+				
+				deplacement[i2][0] += ((B.getX() - A.getX()) / dist) * r*(dist-l0);
+				deplacement[i2][1] += ((B.getY() - A.getY()) / dist) * r*(dist-l0);
+				i1++;
+				i2++;
+			}
+		}while (norme(deplacement,normeMin,n) == false);
+	}
+	
+	
+	private double distance(Sommet sommet, Sommet sommet2) {
+		double x1 = sommet.getX(); 
+		double x2 = sommet2.getX();
+		double y1 = sommet.getY(); 
+		double y2 = sommet2.getY();
+		
+		return Math.sqrt((Math.pow(x2 - x1, 2) + Math.pow(y2 - y1,2)));
 	}
 	public static void main(String[] args) {
 		Graphe g = new Graphe(10);

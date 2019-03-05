@@ -194,7 +194,6 @@ public class Graphe{
 		}while (norme(deplacement,normeMin,n) == false);
 	}
 	
-	
 	private double distance(Sommet sommet, Sommet sommet2) {
 		double x1 = sommet.getX(); 
 		double x2 = sommet2.getX();

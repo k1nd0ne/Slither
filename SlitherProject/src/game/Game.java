@@ -21,7 +21,7 @@ public class Game implements MouseListener{
 	protected JPanelGraphe pan;
 	private Graphics gt;
 	public Game() {
-		this.g = new Graphe(10);
+		this.g = new Graphe(50);
 		
 	}
 	public void init() {

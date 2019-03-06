@@ -10,7 +10,6 @@ public class GrapheGagnantBob extends Graphe {
 	}
 	
 	protected void randomizeArc() {
-		ArrayList<Sommet> sommetsCool = new ArrayList<Sommet>(); 
 		Random r = new Random(); 
 		Arc a;
 		int nbSommetCool = sommets.size()/2; 

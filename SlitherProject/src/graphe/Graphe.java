@@ -122,7 +122,7 @@ public class Graphe{
 	public void randomize(int width, int height) {
 		randomizeSommets(width, height);
 		randomizeArc();
-		forceBased(10,10,10,10);
+		this.forceBased(2000, 0.3, 20, 150);
 	}
 	protected boolean estConnexe(ArrayList<Integer> comp) {
 		for(int i=0; i<comp.size()-1;i++) {
@@ -135,63 +135,67 @@ public class Graphe{
 		
 	}
 	
-	public static boolean norme(double[][] deplacement,double normeMin,int n) {
-		for(int i =0;i<n;i++) {
-			if(Math.sqrt(Math.pow(deplacement[i][0],2) + Math.pow(deplacement[i][1],2)) > normeMin) {
-				return false;
-			}
+	public boolean norme(ArrayList<ArrayList<Double>> deplacement,double normeMin) {
+		boolean res = true;
+		for(int i =0;i<sommets.size();i++) {
+			res = res && Math.sqrt(Math.pow(deplacement.get(i).get(0),2) + Math.pow(deplacement.get(i).get(1),2)) <= normeMin;
 		}
-		return true;
+		return res;
 	}
 	
-	protected void deplacer(double tab[][]) {
-		int i = 0;
-		for (Arc a : this.arcs) {
-			a.s1.setX(a.s1.getX() - (int)tab[i][0]);
-			a.s1.setY(a.s1.getY() - (int)tab[i][0]);
-			
-			a.s2.setX(a.s2.getX() - (int)tab[i][1]);
-			a.s2.setY(a.s2.getY() - (int)tab[i][1]);
-		}
-	}
-	protected void forceBased(int k, int r,double normeMin, double l0) {
-		int n = sommets.size();
-		int m = arcs.size();
-		double[][] deplacement = new double[m][2];
-		for(int i =0;i<m;i++) {
-			deplacement[i][0] = 0;
-			deplacement[i][1] = 0;
+	protected void deplacer(ArrayList<ArrayList<Double>> tab) {
+		for (int i=0; i<sommets.size() ; i++) {
+			sommets.get(i).setX(sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)));
+			sommets.get(i).setY(sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1)));
 		}
 		
+	}
+	private void forceBased(double k, double r,double normeMin, double l0) {
+		int n = sommets.size();
+		ArrayList<ArrayList<Double>> deplacement = new ArrayList<ArrayList<Double>>();
+		
+		for(int i =0;i<n;i++) {
+			deplacement.add(new ArrayList<Double>());
+			deplacement.get(i).add(0.);
+			deplacement.get(i).add(0.);
+		}
 		do {
 			this.deplacer(deplacement);
-			double dist = 0;
+			for(int i=0; i<n; i++) {
+				deplacement.get(i).set(0, 0.);
+				deplacement.get(i).set(1, 0.);
+			}
 			for(int i=0;i<n;i++) {
 				for(int j = 0;j<n;j++) {
-					dist = distance(sommets.get(i),sommets.get(j));
-					deplacement[i][0] += ((sommets.get(i).getX() - sommets.get(j).getX()) / dist) * (k/Math.pow(dist, 2.));
-					deplacement[i][1] += ((sommets.get(i).getY() - sommets.get(j).getY()) / dist) * (k/Math.pow(dist, 2.));
+					double dist = distance(sommets.get(i),sommets.get(j));
+					if(dist>0) {
+						deplacement.get(i).set(0, deplacement.get(i).get(0) + (((double) sommets.get(i).getX() - sommets.get(j).getX()) / dist) * (k/Math.pow(dist, 2.))) ;
+						deplacement.get(i).set(1, deplacement.get(i).get(1) + (((double) sommets.get(i).getY() - sommets.get(j).getY()) / dist) * (k/Math.pow(dist, 2.))) ;
+					}
 				}
 			}
-			for(int i = 0; i< m; i++) {
-				Sommet A = arcs.get(i).s1;
-				Sommet B = arcs.get(i).s2;
-				int i1 = 0 ,i2 = 0;
+			
+			for(int i = 0; i<arcs.size(); i++) {
+				Sommet A = arcs.get(i).getS1(); 
+				Sommet B = arcs.get(i).getS2();
+				int i1 = sommets.indexOf(A);
+				int i2 = sommets.indexOf(B);
 				
-				deplacement[i1][0] += ((B.getX() - A.getX()) / dist) * r*(dist-l0);
-				deplacement[i1][1] += ((B.getY() - A.getY()) / dist) * r*(dist-l0);
-				
-				Sommet Aux;
-				Aux = A;
-				A = B; 
-				B = Aux;
-				
-				deplacement[i2][0] += ((B.getX() - A.getX()) / dist) * r*(dist-l0);
-				deplacement[i2][1] += ((B.getY() - A.getY()) / dist) * r*(dist-l0);
-				i1++;
-				i2++;
+				double dist = distance(A,B);
+				if(dist>0) {
+					deplacement.get(i1).set(0, deplacement.get(i1).get(0) + ((B.getX() - A.getX()) / dist) * r*(dist-l0));
+					deplacement.get(i1).set(1, deplacement.get(i1).get(1) + ((B.getY() - A.getY()) / dist) * r*(dist-l0));
+					
+					deplacement.get(i2).set(0, deplacement.get(i2).get(0) + ((A.getX() - B.getX()) / dist) * r*(dist-l0));
+					deplacement.get(i2).set(1, deplacement.get(i2).get(1) + ((A.getY() - B.getY()) / dist) * r*(dist-l0));
+				}
 			}
-		}while (norme(deplacement,normeMin,n) == false);
+			for(int i=0; i<sommets.size(); i++) {
+				deplacement.get(i).set(0, deplacement.get(i).get(0)*0.9);
+				deplacement.get(i).set(1, deplacement.get(i).get(1)*0.9);
+			}
+			
+		}while (!norme(deplacement,normeMin));
 	}
 	
 	private double distance(Sommet sommet, Sommet sommet2) {
@@ -206,19 +210,20 @@ public class Graphe{
 		Graphe g = new Graphe(10);
 		JFrame fenetre = new JFrame();
 		fenetre.setSize(500,500);
-		g.randomize(fenetre.getWidth(), fenetre.getHeight());
+		Sommet s1 = new Sommet(100,100);
+		g.addS(s1);
+		Sommet s2 = new Sommet(400,400);
+		g.addS(s2);
+		g.addA(new Arc(s1,s2));
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel pan = new JPanel();
 		pan.setBackground(Color.WHITE);
 		fenetre.setContentPane(pan);
-		
 		fenetre.setVisible(true);
 		Graphics gt = pan.getGraphics();
-		while(!g.estFerme()) {
-			g.render(gt);
-		}
-		System.out.println("graphe fermé !");
+			g.forceBased(2000, 0.3, 20, 10);
+		while(true)
 		g.render(gt);
 	}
 }

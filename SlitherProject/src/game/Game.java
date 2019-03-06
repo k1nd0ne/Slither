@@ -21,7 +21,7 @@ public class Game implements MouseListener{
 	protected JPanelGraphe pan;
 	private Graphics gt;
 	public Game() {
-		this.g = new Graphe(50);
+		this.g = new Graphe(20);
 		
 	}
 	public void init() {
@@ -45,7 +45,6 @@ public class Game implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		
 		boolean correctlyClicked = g.gstMouseEvent(e);
-		System.out.println(correctlyClicked);
 		if(correctlyClicked) {
 			joueurCourant.setPlaying();
 			adversaire.setPlaying();
@@ -58,7 +57,7 @@ public class Game implements MouseListener{
 				String gagnant = adversaire.getNom();
 				gt.setColor(Color.BLACK);
 				gt.clearRect(100, 8, 200,15);
-				gt.drawString("JEU FINI : "+gagnant+ " gagne !", 100, 20);
+				gt.drawString("JEU FINI : "+gagnant+ " gagne !", 100, 50);
 				JButton b1 = new JButton("Quitter");
 				fenetre.getContentPane().add(b1);
 				b1.setBounds(10, 500, 100, 30);

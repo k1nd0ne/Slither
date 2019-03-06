@@ -30,6 +30,12 @@ public class Sommet {
 	public int getY() {
 		return this.y;
 	}
+	public void setX(int x) {
+		this.x = x; 
+	}
+	public void setY(int y) {
+		this.y = y; 
+	}
 	public void render(Graphics g,ArrayList<Sommet> sommetsAccessibles) {
 		if(dejaVu) {
 			g.setColor(Color.RED);

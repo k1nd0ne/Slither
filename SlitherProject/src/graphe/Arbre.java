@@ -9,7 +9,17 @@ public class Arbre {
 	protected Arc verspere;
 	protected Sommet scourant;
 	protected ArrayList<Arbre> fils;
-
+	
+	public String toString() {
+		return toString(0);
+	}
+	public String toString(int niveau) {
+		String res =  niveau + " : " + scourant;
+		for(Arbre f : fils ) {
+			res += "\t"+ f.toString(niveau + 1);
+		}
+		return res;
+	}
 	public Arbre(Sommet ao) {
 		verspere = null;
 		scourant = ao;
@@ -48,7 +58,7 @@ public class Arbre {
 		}			
 	}
 	public Set<Arc> chemin(Sommet b){
-		 Set<Arc> res = new HashSet<Arc>();
+		Set<Arc> res = new HashSet<Arc>();
 		if (scourant == b ) {
 			res.add(verspere);
 		}

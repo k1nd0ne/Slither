@@ -1,6 +1,5 @@
 package graphe;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -45,9 +44,11 @@ public class Couplage {
 			if(a.getS2() == s) {
 				return a;
 			}
-			
 		}
 		return null;
+	}
+	public String toString() {
+		return coupl.toString();
 	}
 	
 }

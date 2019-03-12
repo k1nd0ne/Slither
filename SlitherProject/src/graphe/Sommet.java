@@ -11,7 +11,7 @@ public class Sommet {
 	private int x,y;
 	private boolean dejaVu;
 	public String toString() {
-		return "["+x+";"+y+"]";
+		return "("+x+","+y+")";
 	}
 	public Sommet(int x, int y) {
 		this.x = x;

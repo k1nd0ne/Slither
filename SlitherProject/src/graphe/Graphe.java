@@ -122,7 +122,7 @@ public class Graphe{
 	public void randomize(int width, int height) {
 		randomizeSommets(width, height);
 		randomizeArc();
-		this.forceBased(2000, 0.3, 20, 150);
+		//this.forceBased(2000, 0.3, 20, 150);
 	}
 	protected boolean estConnexe(ArrayList<Integer> comp) {
 		for(int i=0; i<comp.size()-1;i++) {
@@ -191,8 +191,8 @@ public class Graphe{
 				}
 			}
 			for(int i=0; i<sommets.size(); i++) {
-				deplacement.get(i).set(0, deplacement.get(i).get(0)*0.9);
-				deplacement.get(i).set(1, deplacement.get(i).get(1)*0.9);
+				deplacement.get(i).set(0, deplacement.get(i).get(0)*0.8);
+				deplacement.get(i).set(1, deplacement.get(i).get(1)*0.8);
 			}
 			
 		}while (!norme(deplacement,normeMin));

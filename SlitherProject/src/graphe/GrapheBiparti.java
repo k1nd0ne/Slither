@@ -23,6 +23,10 @@ public class GrapheBiparti extends Graphe{
 		this.A = new ArrayList<Sommet>(); 
 		this.B = new ArrayList<Sommet>();
 	}
+	public void randomize(int width, int height) {
+		super.randomize(width, height);
+		System.out.println(this.couplagemax());
+	}
 	protected void randomizeSommets(int width, int height){
 		
 		Random r = new Random();
@@ -80,7 +84,7 @@ public class GrapheBiparti extends Graphe{
 			}
 		}
 		return res;
-		}
+	}
 	
 	public Couplage couplagemax() {
 		Couplage m = new Couplage();
@@ -89,6 +93,7 @@ public class GrapheBiparti extends Graphe{
 				Arbre T = new Arbre(ao);
 				while(!voisinage(T.getA()).equals(T.getB())) {
 					Sommet b = new Sommet(0,0);
+					// ON DETERMINE B
 					for(Sommet s : voisinage(T.getA())){
 						if(!T.getB().contains(s)) {
 							b = s;
@@ -96,6 +101,8 @@ public class GrapheBiparti extends Graphe{
 							
 						}
 					}
+					
+					//ON DETERMINE A'
 					Arc ap = new Arc(b,b);
 					for(Arc a : arcs) {
 						if(a.getS1()==b) {
@@ -113,16 +120,17 @@ public class GrapheBiparti extends Graphe{
 							
 						}
 					}
-					if(b==ap.getS1()) {
-						T.add(ap.getS2(), ap);
-					}
-					else {
-						T.add(ap.getS1(), ap);
-					}
+
+					T.add(b, ap);
+					
 					if(!m.estexpose(b)) {
 						Arc  ba = m.getVoisin(b);
-						T.add(b, ba);
-								
+						if(b==ba.getS1()) {
+							T.add(ap.getS2(), ap);
+						}
+						else {
+							T.add(ap.getS1(), ap);
+						}	
 					}
 					else {
 						m.augmenter(T.chemin(b));

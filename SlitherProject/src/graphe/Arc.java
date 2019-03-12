@@ -27,7 +27,9 @@ public class Arc {
 		}
 		g.drawLine(s1.getX(), s1.getY(), s2.getX(), s2.getY());
 	}
-	
+	public String toString() {
+		return "[" + s1.toString() + " ; " + s2.toString() + " ]";
+	}
 	public static void main(String[] args) {
 		Sommet s = new Sommet(40,40);
 		Sommet sVu = new Sommet(40,60);

@@ -37,13 +37,13 @@ public class Couplage {
 		}		
 		coupl=res;
 	}
-	public Sommet getVoisin(Sommet s) {
+	public Arc getVoisin(Sommet s) {
 		for(Arc a : coupl) {
 			if(a.getS1() == s) {
-				return a.getS2();
+				return a;
 			}
 			if(a.getS2() == s) {
-				return a.getS1();
+				return a;
 			}
 			
 		}

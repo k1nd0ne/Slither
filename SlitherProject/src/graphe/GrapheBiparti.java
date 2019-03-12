@@ -1,7 +1,9 @@
 package graphe;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 
 public class GrapheBiparti extends Graphe{
@@ -65,4 +67,72 @@ public class GrapheBiparti extends Graphe{
 		
 	}
 	
+	private Set<Sommet> voisinage(Set<Sommet> s){
+		Set<Sommet> res = new HashSet<Sommet>();
+		for (Arc a : arcs) {
+			if(s.contains(a.getS1())) {
+				res.add(a.getS2());
+				
+			
+			}
+			if(s.contains(a.getS2())) {
+				res.add(a.getS1());
+			}
+		}
+		return res;
+		}
+	
+	public Couplage couplagemax() {
+		Couplage m = new Couplage();
+		for(Sommet ao : A) {
+			if(m.estexpose(ao)) {
+				Arbre T = new Arbre(ao);
+				while(!voisinage(T.getA()).equals(T.getB())) {
+					Sommet b = new Sommet(0,0);
+					for(Sommet s : voisinage(T.getA())){
+						if(!T.getB().contains(s)) {
+							b = s;
+							break;
+							
+						}
+					}
+					Arc ap = new Arc(b,b);
+					for(Arc a : arcs) {
+						if(a.getS1()==b) {
+							if(T.getA().contains(a.getS2())){
+								ap = a;
+								break;
+							}
+						
+						}
+						if(a.getS2()==b) {
+							if(T.getA().contains(a.getS1())){
+								ap = a;
+								break;
+							}
+							
+						}
+					}
+					if(b==ap.getS1()) {
+						T.add(ap.getS2(), ap);
+					}
+					else {
+						T.add(ap.getS1(), ap);
+					}
+					if(!m.estexpose(b)) {
+						Arc  ba = m.getVoisin(b);
+						T.add(b, ba);
+								
+					}
+					else {
+						m.augmenter(T.chemin(b));
+						break;
+					}
+					
+				}
+			}
+		}
+		return m;
+		
+	}
 }

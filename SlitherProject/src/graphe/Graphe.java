@@ -150,7 +150,7 @@ public class Graphe{
 		}
 		
 	}
-	private void forceBased(double k, double r,double normeMin, double l0) {
+	public void forceBased(double k, double r,double normeMin, double l0) {
 		int n = sommets.size();
 		ArrayList<ArrayList<Double>> deplacement = new ArrayList<ArrayList<Double>>();
 		

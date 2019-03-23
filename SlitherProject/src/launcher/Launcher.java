@@ -47,6 +47,7 @@ public class Launcher {
 				Game g = new GameBiparti(); 
 				g.init();
 				g.render();
+				
 			}
 		});
 		

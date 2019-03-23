@@ -3,6 +3,9 @@ package launcher;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -16,58 +19,17 @@ import game.GameBob;
 
 
 
-public class Launcher {
-	private JButton menuItem;
-	private JButton menuItem2;
-	private JButton menuItem3;
-	private JButton menuItem4;
+public class Launcher{
+	private JLabel menuItem;
+	private JLabel menuItem2;
+	private JLabel menuItem3;
+	private JLabel menuItem4;
 	private JButton quit;
 	private JFrame fenetre;  
 	private JPanel panel; 
 	public Launcher() {
 		
-		menuItem  = new JButton("Graphe aléatoire");
-		menuItem2 = new JButton("Graphe aléatoire biparti"); 
-		menuItem3 = new JButton("Graphe gagnant pour Alice");
-		menuItem4 = new JButton("Graphe gagnant pour Bob");
 		quit = new JButton("Quitter");
-		menuItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Game g = new Game(); 
-				g.init();
-				g.render();
-			}
-		});
-		
-
-		menuItem2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Game g = new GameBiparti(); 
-				g.init();
-				g.render();
-				
-			}
-		});
-		
-		menuItem3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Game g = new GameAlice(); 
-				g.init();
-				g.render();
-			}
-		});
-		
-		menuItem4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Game g = new GameBob(); 
-				g.init();
-				g.render();
-			}
-		});
 		
 		quit.addActionListener(new ActionListener() {
 			@Override
@@ -84,9 +46,18 @@ public class Launcher {
 		fenetre.setResizable(false);
 		panel = new JPanel();
 		fenetre.setContentPane(panel);
-		JLabel titre = new JLabel("SLITHER GAME");
+		ImageIcon imageTitre = new ImageIcon("src/images/title.png");
+		JLabel titre = new JLabel("", imageTitre, JLabel.CENTER);
 		ImageIcon image = new ImageIcon("src/images/background.png");
-		JLabel label = new JLabel("", image, JLabel.CENTER);
+		ImageIcon b1 = new ImageIcon("src/images/b1.png");
+		ImageIcon b2 = new ImageIcon("src/images/b2.png");
+		ImageIcon b3 = new ImageIcon("src/images/b3.png");
+		ImageIcon b4 = new ImageIcon("src/images/b4.png");
+		menuItem = new JLabel("", b1, JLabel.CENTER);
+		menuItem2 = new JLabel("", b2, JLabel.CENTER);
+		menuItem3 = new JLabel("", b3, JLabel.CENTER);
+		menuItem4 = new JLabel("", b4, JLabel.CENTER);
+	    JLabel label = new JLabel("", image, JLabel.CENTER);
 		fenetre.add(label, BorderLayout.CENTER );
 		fenetre.add(titre);	
 		fenetre.add(menuItem);
@@ -96,14 +67,53 @@ public class Launcher {
 		fenetre.add(quit);
 		fenetre.setVisible(true);	
 		label.setBounds(0,0 ,300, 200);
-		titre.setBounds(100,200 ,100, 20);
-		menuItem.setBounds(60,250,150,20);
-		menuItem2.setBounds(50,300,175,20);
-		menuItem3.setBounds(50,350,175,20);
-		menuItem4.setBounds(50,400,175,20);
+		titre.setBounds(0,200 ,300, 30);
+		menuItem.setBounds(40,250,200,30);
+		menuItem2.setBounds(45,300,200,30);
+		menuItem3.setBounds(45,350,200,30);
+		menuItem4.setBounds(45,400,200,30);
 		quit.setBounds(120,450,50,20);
+		menuItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	Game g = new Game(); 
+				g.init();
+				g.render();
+            }
+
+        });
+
+		menuItem2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	Game g = new GameBiparti(); 
+				g.init();
+				g.render();
+            }
+
+        });
 		
+		menuItem3.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	Game g = new GameAlice(); 
+				g.init();
+				g.render();
+            }
+
+        });
+		
+		menuItem4.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	Game g = new GameBob(); 
+				g.init();
+				g.render();
+            }
+
+        });
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 		}
 	

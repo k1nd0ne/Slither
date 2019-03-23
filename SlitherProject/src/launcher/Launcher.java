@@ -48,7 +48,7 @@ public class Launcher{
 		fenetre.setContentPane(panel);
 		ImageIcon imageTitre = new ImageIcon("src/images/title.png");
 		JLabel titre = new JLabel("", imageTitre, JLabel.CENTER);
-		ImageIcon image = new ImageIcon("src/images/background.png");
+		ImageIcon image = new ImageIcon("src/images/background.jpeg");
 		ImageIcon b1 = new ImageIcon("src/images/b1.png");
 		ImageIcon b2 = new ImageIcon("src/images/b2.png");
 		ImageIcon b3 = new ImageIcon("src/images/b3.png");

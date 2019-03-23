@@ -151,6 +151,7 @@ public class Graphe{
 		
 	}
 	public void forceBased(double k, double r,double normeMin, double l0) {
+		int etape = 0;
 		int n = sommets.size();
 		ArrayList<ArrayList<Double>> deplacement = new ArrayList<ArrayList<Double>>();
 		
@@ -194,8 +195,8 @@ public class Graphe{
 				deplacement.get(i).set(0, deplacement.get(i).get(0)*0.8);
 				deplacement.get(i).set(1, deplacement.get(i).get(1)*0.8);
 			}
-			
-		}while (!norme(deplacement,normeMin));
+			etape++;
+		}while (!norme(deplacement,normeMin) && etape != 1000);
 	}
 	
 	private double distance(Sommet sommet, Sommet sommet2) {

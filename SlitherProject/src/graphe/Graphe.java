@@ -161,7 +161,6 @@ public class Graphe{
 					if(distanceCorrect(a)){
 						sommets.get(i).setX(sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)));
 						sommets.get(i).setY(sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1)));
-						System.out.println(sommets.get(i).getX() + "--" + sommets.get(i).getY());
 					}
 			}
 			

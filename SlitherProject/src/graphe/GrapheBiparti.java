@@ -105,12 +105,9 @@ public class GrapheBiparti extends Graphe{
 	public Couplage couplagemax() {
 		Couplage m = new Couplage();
 		for(Sommet ao : A) {
-			System.out.println("\nCouplage actuel : " + m);
-			System.out.println("Sommet a0 : " + ao);
 			if(m.estexpose(ao)) {
 				Arbre T = new Arbre(ao);
 				while(!voisinage(T.getA()).equals(T.getB())) {
-					System.out.println("Arbre : " + T);
 					Sommet b = new Sommet(0,0);
 					// ON DETERMINE B
 					for(Sommet s : voisinage(T.getA())){
@@ -139,12 +136,9 @@ public class GrapheBiparti extends Graphe{
 							
 						}
 					}
-					System.out.println("A' = " + ap);
 					T.add(b, ap);
-					
 					if(!m.estexpose(b)) {
 						Arc  ba = m.getVoisin(b);
-						System.out.println("On augmente l'arbre avec l'arc " + ba);
 						if(b==ba.getS1()) {
 							T.add(ba.getS2(), ba);
 						}
@@ -153,9 +147,7 @@ public class GrapheBiparti extends Graphe{
 						}
 					}
 					else {
-						m.augmenter(T.chemin(b));
-						System.out.println("On a un chemin augmentant de " + ao + " vers " + b);
-						
+						m.augmenter(T.chemin(b));						
 						break;
 					}
 					

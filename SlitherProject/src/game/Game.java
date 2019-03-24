@@ -80,6 +80,8 @@ public class Game implements MouseListener{
 				JButton b1 = new JButton("Quitter");
 				fenetre.getContentPane().add(b1);
 				b1.setBounds(10, 550, 100, 30);
+				b1.setVisible(true);
+				fenetre.update(gt);
 				b1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

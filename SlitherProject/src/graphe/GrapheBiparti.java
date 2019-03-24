@@ -23,9 +23,25 @@ public class GrapheBiparti extends Graphe{
 		this.A = new ArrayList<Sommet>(); 
 		this.B = new ArrayList<Sommet>();
 	}
+	public ArrayList<Sommet> getA(){
+		return A;
+	}
+	public ArrayList<Sommet> getB(){
+		return B;
+	}
+	public String toString() {
+		String res = "Sommets de A : " + A + "\nSommets de B : " + B + "\nArcs : " + arcs;
+		return res;
+	}
 	public void randomize(int width, int height) {
 		super.randomize(width, height);
 		System.out.println(this.couplagemax());
+	}
+	public void addStoA(Sommet s) {
+		A.add(s);
+	}
+	public void addStoB(Sommet s) {
+		B.add(s);
 	}
 	protected void randomizeSommets(int width, int height){
 		
@@ -89,9 +105,12 @@ public class GrapheBiparti extends Graphe{
 	public Couplage couplagemax() {
 		Couplage m = new Couplage();
 		for(Sommet ao : A) {
+			System.out.println("\nCouplage actuel : " + m);
+			System.out.println("Sommet a0 : " + ao);
 			if(m.estexpose(ao)) {
 				Arbre T = new Arbre(ao);
 				while(!voisinage(T.getA()).equals(T.getB())) {
+					System.out.println("Arbre : " + T);
 					Sommet b = new Sommet(0,0);
 					// ON DETERMINE B
 					for(Sommet s : voisinage(T.getA())){
@@ -120,20 +139,23 @@ public class GrapheBiparti extends Graphe{
 							
 						}
 					}
-
+					System.out.println("A' = " + ap);
 					T.add(b, ap);
 					
 					if(!m.estexpose(b)) {
 						Arc  ba = m.getVoisin(b);
+						System.out.println("On augmente l'arbre avec l'arc " + ba);
 						if(b==ba.getS1()) {
-							T.add(ap.getS2(), ap);
+							T.add(ba.getS2(), ba);
 						}
 						else {
-							T.add(ap.getS1(), ap);
-						}	
+							T.add(ba.getS1(), ba);
+						}
 					}
 					else {
 						m.augmenter(T.chemin(b));
+						System.out.println("On a un chemin augmentant de " + ao + " vers " + b);
+						
 						break;
 					}
 					
@@ -141,6 +163,39 @@ public class GrapheBiparti extends Graphe{
 			}
 		}
 		return m;
+		
+	}
+	public static void main(String[] args) {
+		GrapheBiparti gp = new GrapheBiparti(5,5);
+		gp.addStoA(new Sommet(35,406));
+		gp.addStoA(new Sommet(187,286));
+		gp.addStoA(new Sommet(431,295));
+		gp.addStoA(new Sommet(134,404));
+		gp.addStoA(new Sommet(76,260));
+
+		gp.addStoB(new Sommet(252,231));
+		gp.addStoB(new Sommet(187,414));
+		gp.addStoB(new Sommet(382,304));
+		gp.addStoB(new Sommet(182,219));
+		gp.addStoB(new Sommet(379,242));
+		
+		gp.addA(new Arc(gp.getA().get(3), gp.getB().get(3)));
+		gp.addA(new Arc(gp.getA().get(2), gp.getB().get(3)));
+		gp.addA(new Arc(gp.getA().get(0), gp.getB().get(4)));
+		gp.addA(new Arc(gp.getA().get(0), gp.getB().get(0)));
+		gp.addA(new Arc(gp.getA().get(0), gp.getB().get(3)));
+		gp.addA(new Arc(gp.getA().get(4), gp.getB().get(0)));
+		gp.addA(new Arc(gp.getA().get(1), gp.getB().get(4)));
+		gp.addA(new Arc(gp.getA().get(3), gp.getB().get(1)));
+		gp.addA(new Arc(gp.getA().get(1), gp.getB().get(0)));
+		gp.addA(new Arc(gp.getA().get(4), gp.getB().get(3)));
+		gp.addA(new Arc(gp.getA().get(2), gp.getB().get(1)));
+		gp.addA(new Arc(gp.getA().get(3), gp.getB().get(2)));
+		
+		System.out.println(gp.couplagemax());
+		
+		
+		
 		
 	}
 }

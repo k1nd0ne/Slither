@@ -142,15 +142,35 @@ public class Graphe{
 		}
 		return res;
 	}
-	
+	private boolean distanceCorrect(Sommet a) {
+		for(Sommet b : this.sommets) {
+			if(distance(b,a) < 5) {
+				return false;
+			}
+		}
+		return true;
+	}
 	protected void deplacer(ArrayList<ArrayList<Double>> tab) {
 		for (int i=0; i<sommets.size() ; i++) {
-			sommets.get(i).setX(sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)));
-			sommets.get(i).setY(sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1)));
+			if(sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)) > 0 && sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)) < 500 && sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1)) > 0 && sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1)) < 450 ){
+				
+				
+				int n1 = sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)); 
+				int n2 = sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1));
+					Sommet a = new Sommet(n1,n2);
+					if(distanceCorrect(a)){
+						sommets.get(i).setX(sommets.get(i).getX() + (int) Math.round(tab.get(i).get(0)));
+						sommets.get(i).setY(sommets.get(i).getY() + (int) Math.round(tab.get(i).get(1)));
+						System.out.println(sommets.get(i).getX() + "--" + sommets.get(i).getY());
+					}
+			}
+			
+			
 		}
 		
 	}
-	private void forceBased(double k, double r,double normeMin, double l0) {
+	public void forceBased(double k, double r,double normeMin, double l0) {
+		int etape = 0;
 		int n = sommets.size();
 		ArrayList<ArrayList<Double>> deplacement = new ArrayList<ArrayList<Double>>();
 		
@@ -194,8 +214,8 @@ public class Graphe{
 				deplacement.get(i).set(0, deplacement.get(i).get(0)*0.8);
 				deplacement.get(i).set(1, deplacement.get(i).get(1)*0.8);
 			}
-			
-		}while (!norme(deplacement,normeMin));
+			etape++;
+		}while (!norme(deplacement,normeMin) && etape < 1000);
 	}
 	
 	private double distance(Sommet sommet, Sommet sommet2) {

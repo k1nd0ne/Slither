@@ -3,6 +3,8 @@ package joueur;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import graphe.Sommet;
+
 public class Joueur {
 
 	private String nom;
@@ -12,7 +14,8 @@ public class Joueur {
 		this.nom = nom;
 	}
 	
-	public void play() {
+	public Sommet play() {
+		return null;
 	}
 	
 	public void setPlaying() {

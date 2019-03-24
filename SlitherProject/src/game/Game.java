@@ -13,10 +13,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import graphe.Graphe;
+import graphe.Sommet;
 import joueur.Joueur;
 
 public class Game implements MouseListener{
-	private Joueur joueurCourant, adversaire;
+	protected Joueur joueurCourant, adversaire;
 	protected Graphe g;
 	private JFrame fenetre;
 	protected JPanelGraphe pan;
@@ -24,11 +25,10 @@ public class Game implements MouseListener{
 	private Graphics gt;
 	public Game() {
 		this.g = new Graphe(20);
-		
-	}
-	public void init() {
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
+	}
+	public void init() {		
 		forceBased = new JButton("Appliquer Force-Based");
 		forceBased.setBounds(10, 500, 200, 30);
 		fenetre = new JFrame();
@@ -47,6 +47,15 @@ public class Game implements MouseListener{
 				g.render(gt);
 			}
 		});
+		Sommet s = joueurCourant.play();
+		if(s != null) {
+			g.setSommetCourant(s);
+			Joueur temp2 = joueurCourant;
+			joueurCourant = adversaire;
+			adversaire = temp2;
+			pan.setJoueur(joueurCourant);
+			render();
+		}
 	}
 	
 	public void refresh() {
@@ -90,8 +99,17 @@ public class Game implements MouseListener{
 				});
 
 			}
-			
-			
+			else {
+				Sommet s = joueurCourant.play();
+				if(s != null) {
+					g.setSommetCourant(s);
+					Joueur temp2 = joueurCourant;
+					joueurCourant = adversaire;
+					adversaire = temp2;
+					pan.setJoueur(joueurCourant);
+					render();
+				}
+			}
 		}
 	}
 

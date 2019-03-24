@@ -81,6 +81,7 @@ public class Graphe{
 			return false;
 		}
 	}
+	
 	protected void randomizeSommets(int width, int height){
 		Random r = new Random();
 		for(int i=0;i<nbSommet;i++) {

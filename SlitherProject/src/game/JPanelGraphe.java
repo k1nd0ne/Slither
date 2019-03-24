@@ -28,4 +28,7 @@ public class JPanelGraphe extends JPanel {
 	public void setJoueur(Joueur j) {
 		this.j = j;
 	}
+	public void removeBased() {
+		this.remove(b);
+	}
 }

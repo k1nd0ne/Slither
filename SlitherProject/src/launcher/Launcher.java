@@ -80,7 +80,6 @@ public class Launcher{
 				g.init();
 				g.render();
             }
-
         });
 
 		menuItem2.addMouseListener(new MouseAdapter() {

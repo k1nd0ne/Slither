@@ -29,7 +29,7 @@ public class Game implements MouseListener{
 	public void init() {
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
-		forceBased = new JButton("Appliquer ForceBased");
+		forceBased = new JButton("Appliquer Force-Based");
 		forceBased.setBounds(10, 500, 200, 30);
 		fenetre = new JFrame();
 		fenetre.setSize(600,600);
@@ -50,10 +50,9 @@ public class Game implements MouseListener{
 	}
 	
 	public void refresh() {
+		forceBased.setVisible(false);
 		pan.updateUI();
-		pan = new JPanelGraphe(g,joueurCourant,forceBased);
-		fenetre.setContentPane(pan);
-		pan.addMouseListener(this);
+		pan.update(gt);
 	}
 	
 

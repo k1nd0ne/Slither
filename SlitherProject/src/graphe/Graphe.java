@@ -246,4 +246,8 @@ public class Graphe{
 		while(true)
 		g.render(gt);
 	}
+	public void afficherCouplage(Graphics gt) {
+		// TODO Auto-generated method stub
+		
+	}
 }

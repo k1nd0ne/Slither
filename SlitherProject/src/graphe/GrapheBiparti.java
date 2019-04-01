@@ -1,5 +1,6 @@
 package graphe;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Random;
@@ -156,6 +157,13 @@ public class GrapheBiparti extends Graphe{
 		}
 		return m;
 		
+	}
+	
+	public void afficherCouplage(Graphics g) {
+		Couplage c = couplagemax();
+		for(Arc a : c.coupl) {
+			a.Paint(g);
+		}
 	}
 	public static void main(String[] args) {
 		GrapheBiparti gp = new GrapheBiparti(5,5);

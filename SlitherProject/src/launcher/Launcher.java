@@ -33,7 +33,6 @@ public class Launcher{
 		
 		quit.addActionListener(new ActionListener() {
 			@Override
-			
 			public void actionPerformed(ActionEvent e) {
 				fenetre.setVisible(false);
 				System.exit(0);

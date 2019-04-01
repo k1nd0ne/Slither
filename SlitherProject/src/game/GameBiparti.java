@@ -8,7 +8,7 @@ public class GameBiparti extends Game{
 
 	public GameBiparti(boolean iaj1, boolean iaj2) {
 		
-		this.g = new GrapheBiparti(3,3);
+		this.g = new GrapheBiparti(5,5);
 		if(iaj1) {
 			this.joueurCourant = new IA("Bob", (GrapheBiparti) this.g);
 		}

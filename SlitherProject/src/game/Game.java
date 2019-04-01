@@ -82,6 +82,10 @@ public class Game implements MouseListener{
 			pan.setJoueur(joueurCourant);
 			render();
 			if(g.estFerme()) {
+				
+				g.afficherCouplage(gt);
+
+				
 				String gagnant = adversaire.getNom();
 				gt.setColor(Color.BLACK);
 				gt.clearRect(100, 8, 200,15);
@@ -90,7 +94,7 @@ public class Game implements MouseListener{
 				fenetre.getContentPane().add(b1);
 				b1.setBounds(10, 550, 100, 30);
 				b1.setVisible(true);
-				fenetre.update(gt);
+				//fenetre.update(gt);
 				b1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {

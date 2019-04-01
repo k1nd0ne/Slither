@@ -55,4 +55,8 @@ public class Arc {
 			a2.render(g);
 		}
 	}
+	public void Paint(Graphics g) {
+		g.setColor(Color.GREEN);
+		g.drawLine(s1.getX(), s1.getY(), s2.getX(), s2.getY());
+	}
 }

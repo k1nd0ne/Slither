@@ -7,10 +7,14 @@ import javax.swing.JPanel;
 
 public class Arc {
 	Sommet s1,s2;
-	
+	boolean dejaVu;
 	public Arc(Sommet s1, Sommet s2) {
 		this.s1 = s1;
 		this.s2 = s2;
+		this.dejaVu = false;
+	}
+	public void setVu() {
+		this.dejaVu = true;
 	}
 	public Sommet getS1() {
 		return s1;
@@ -19,7 +23,7 @@ public class Arc {
 		return s2;
 	}
 	public void render(Graphics g) {
-		if(s1.getDejaVu() && s2.getDejaVu()) {
+		if(dejaVu) {
 			g.setColor(Color.RED);
 		}
 		else {
@@ -55,7 +59,7 @@ public class Arc {
 			a2.render(g);
 		}
 	}
-	public void Paint(Graphics g) {
+	public void paint(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.drawLine(s1.getX(), s1.getY(), s2.getX(), s2.getY());
 	}

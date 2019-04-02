@@ -86,7 +86,7 @@ public class Launcher{
             @Override
             public void mouseClicked(MouseEvent e) {
             	GameBiparti g = new GameBiparti(true,false); 
-				g.init(false, true);
+				g.init(true, false);
 				g.render();
             }
 

@@ -39,8 +39,11 @@ public class Sommet {
 	public void setY(int y) {
 		this.y = y; 
 	}
-	public void render(Graphics g,ArrayList<Sommet> sommetsAccessibles) {
-		if(dejaVu) {
+	public void render(Graphics g,ArrayList<Sommet> sommetsAccessibles, Sommet sommetCourant) {
+		if(this == sommetCourant) {
+			g.setColor(Color.BLUE);
+		}
+		else if(dejaVu) {
 			g.setColor(Color.RED);
 		}
 		else if(sommetsAccessibles.contains(this)) {
@@ -72,9 +75,9 @@ public class Sommet {
 		fenetre.setVisible(true);
 		Graphics g = pan.getGraphics();
 		while(true) {
-			s.render(g,sommetsAccessibles);
-			sVu.render(g,sommetsAccessibles);
-			sAcc.render(g,sommetsAccessibles);
+			s.render(g,sommetsAccessibles,s);
+			sVu.render(g,sommetsAccessibles,s);
+			sAcc.render(g,sommetsAccessibles,s);
 		}
 	}
 }

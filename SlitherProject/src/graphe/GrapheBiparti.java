@@ -161,7 +161,7 @@ public class GrapheBiparti extends Graphe{
 	public void afficherCouplage(Graphics g) {
 		Couplage c = couplagemax();
 		for(Arc a : c.coupl) {
-			a.Paint(g);
+			a.paint(g);
 		}
 	}
 	public static void main(String[] args) {

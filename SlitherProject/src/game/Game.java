@@ -45,7 +45,7 @@ public class Game implements MouseListener{
 		forceBased.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				refresh();
-				g.forceBased(2000, 0.3, 20, 150);
+				g.forceBased(6000, 0.3, 20, 100);
 				g.render(gt);
 			}
 		});
@@ -97,7 +97,6 @@ public class Game implements MouseListener{
 		fenetre.getContentPane().add(b1);
 		b1.setBounds(10, 550, 100, 30);
 		b1.setVisible(true);
-		//fenetre.update(gt);
 		b1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -106,6 +105,7 @@ public class Game implements MouseListener{
 		});
 	}
 	public void play() {
+		System.out.println("Le joueur : " + joueurCourant + " de type " + joueurCourant.getClass().getCanonicalName());
 		Sommet s = joueurCourant.play(g.getSommetsAccessibles(), g.getSommetCourant());
 		if(s != null) {
 			g.setSommetCourant(s);

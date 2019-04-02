@@ -27,6 +27,13 @@ public class Graphe{
 		arcs.add(a);
 	}
 	public void setSommetCourant(Sommet s) {
+		if(sommetCourant!=null) {
+			for(Arc a: arcs) {
+				if((a.getS1()==s && a.getS2()==sommetCourant) ||(a.getS1()==sommetCourant && a.getS2()==s)) {
+					a.setVu();
+				}
+			}
+		}
 		this.sommetCourant = s;
 		s.setVu();
 	}
@@ -60,7 +67,7 @@ public class Graphe{
 			a.render(g);
 		}
 		for(Sommet s: sommets) {
-			s.render(g, sommetsAccessibles);
+			s.render(g, sommetsAccessibles, sommetCourant);
 		}
 	}
 	

@@ -2,6 +2,7 @@ package joueur;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import graphe.Sommet;
 
@@ -14,7 +15,8 @@ public class Joueur {
 		this.nom = nom;
 	}
 	
-	public Sommet play() {
+	public Sommet play(ArrayList<Sommet> SommetsAccessible,Sommet sommetCourant) {
+		System.out.println("je suis dans joueur");
 		return null;
 	}
 	
@@ -34,6 +36,9 @@ public class Joueur {
 		g.setColor(Color.BLACK);
 		g.clearRect(100, 8, 200,15);
 		g.drawString("C'est à "+getNom()+" de jouer !", 100, 20);
+		
+	}
+	public void init() {
 		
 	}
 }

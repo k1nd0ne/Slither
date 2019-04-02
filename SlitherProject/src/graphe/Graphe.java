@@ -30,6 +30,9 @@ public class Graphe{
 		this.sommetCourant = s;
 		s.setVu();
 	}
+	public Sommet getSommetCourant() {
+		return this.sommetCourant;
+	}
 	public ArrayList<Sommet> getSommetsAccessibles(){
 		ArrayList<Sommet> res = new ArrayList<Sommet>();
 		if(sommetCourant == null) {
@@ -100,7 +103,7 @@ public class Graphe{
 		}
 		int i1;
 		int aux;
-		int i2; 
+		int i2;  
 		Arc a;
 		while(!estConnexe(comp)) {
 			i1 = r.nextInt(nbSommet);

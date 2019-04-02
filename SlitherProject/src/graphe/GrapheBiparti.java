@@ -36,7 +36,6 @@ public class GrapheBiparti extends Graphe{
 	}
 	public void randomize(int width, int height) {
 		super.randomize(width, height);
-		System.out.println(this.couplagemax());
 	}
 	public void addStoA(Sommet s) {
 		A.add(s);

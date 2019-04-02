@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import graphe.Graphe;
 import graphe.Sommet;
+import joueur.IA;
 import joueur.Joueur;
 
 public class Game implements MouseListener{
@@ -28,7 +29,8 @@ public class Game implements MouseListener{
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
 	}
-	public void init() {		
+	
+	public void initBis() {
 		forceBased = new JButton("Appliquer Force-Based");
 		forceBased.setBounds(10, 500, 200, 30);
 		fenetre = new JFrame();
@@ -47,15 +49,10 @@ public class Game implements MouseListener{
 				g.render(gt);
 			}
 		});
-		Sommet s = joueurCourant.play();
-		if(s != null) {
-			g.setSommetCourant(s);
-			Joueur temp2 = joueurCourant;
-			joueurCourant = adversaire;
-			adversaire = temp2;
-			pan.setJoueur(joueurCourant);
-			render();
-		}
+	}
+	public void init() {		
+		initBis();
+		play();
 	}
 	
 	public void refresh() {
@@ -74,6 +71,7 @@ public class Game implements MouseListener{
 		
 		boolean correctlyClicked = g.gstMouseEvent(e);
 		if(correctlyClicked) {
+			g.afficherCouplage(gt);
 			joueurCourant.setPlaying();
 			adversaire.setPlaying();
 			Joueur temp = joueurCourant;
@@ -82,41 +80,48 @@ public class Game implements MouseListener{
 			pan.setJoueur(joueurCourant);
 			render();
 			if(g.estFerme()) {
-				
-				g.afficherCouplage(gt);
-
-				
-				String gagnant = adversaire.getNom();
-				gt.setColor(Color.BLACK);
-				gt.clearRect(100, 8, 200,15);
-				gt.drawString("JEU FINI : "+gagnant+ " gagne !", 100, 50);
-				JButton b1 = new JButton("Quitter");
-				fenetre.getContentPane().add(b1);
-				b1.setBounds(10, 550, 100, 30);
-				b1.setVisible(true);
-				//fenetre.update(gt);
-				b1.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						fenetre.setVisible(false);
-					}
-				});
-
+				gstEnd();
 			}
 			else {
-				Sommet s = joueurCourant.play();
-				if(s != null) {
-					g.setSommetCourant(s);
-					Joueur temp2 = joueurCourant;
-					joueurCourant = adversaire;
-					adversaire = temp2;
-					pan.setJoueur(joueurCourant);
-					render();
-				}
+				play();
 			}
 		}
 	}
-
+	public void gstEnd() {
+		g.afficherCouplage(gt);
+		String gagnant = adversaire.getNom();
+		gt.setColor(Color.BLACK);
+		gt.clearRect(100, 8, 200,15);
+		gt.drawString("JEU FINI : "+gagnant+ " gagne !", 100, 50);
+		JButton b1 = new JButton("Quitter");
+		fenetre.getContentPane().add(b1);
+		b1.setBounds(10, 550, 100, 30);
+		b1.setVisible(true);
+		//fenetre.update(gt);
+		b1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fenetre.setVisible(false);
+			}
+		});
+	}
+	public void play() {
+		Sommet s = joueurCourant.play(g.getSommetsAccessibles(), g.getSommetCourant());
+		if(s != null) {
+			g.setSommetCourant(s);
+			Joueur temp2 = joueurCourant;
+			joueurCourant = adversaire;
+			adversaire = temp2;
+			pan.setJoueur(joueurCourant);
+			render();
+			if(g.estFerme()) {
+				gstEnd();
+			}
+			else {
+				play();
+			}
+		}
+	}
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub

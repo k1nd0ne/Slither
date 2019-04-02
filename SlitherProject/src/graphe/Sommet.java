@@ -18,6 +18,9 @@ public class Sommet {
 		this.y = y;
 		dejaVu = false;
 	}
+	public boolean equals(Sommet s) {
+		return s.getY() == y && s.getX()==x;
+	}
 	public boolean getDejaVu() {
 		return dejaVu;
 	}

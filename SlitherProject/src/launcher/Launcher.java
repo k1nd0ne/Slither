@@ -85,8 +85,8 @@ public class Launcher{
 		menuItem2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	Game g = new GameBiparti(false,true); 
-				g.init();
+            	GameBiparti g = new GameBiparti(true,false); 
+				g.init(false, true);
 				g.render();
             }
 

@@ -14,9 +14,9 @@ public class Couplage {
 	
 	public boolean estexpose (Sommet s) {
 		for(Arc a : coupl) {
-			if(a.getS1()==s || a.getS2()==s)
-					return false;
-				
+			if(a.getS1()==s || a.getS2()==s) {
+				return false;
+			}
 		}
 		return true;
 		

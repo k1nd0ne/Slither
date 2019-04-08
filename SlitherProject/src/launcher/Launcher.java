@@ -24,6 +24,7 @@ public class Launcher{
 	private JLabel menuItem2;
 	private JLabel menuItem3;
 	private JLabel menuItem4;
+	private JLabel menuItem5;
 	private JButton quit;
 	private JFrame fenetre;  
 	private JPanel panel; 
@@ -42,21 +43,23 @@ public class Launcher{
 		
 		
 		fenetre = new JFrame("Menu principal");
-		fenetre.setSize(300, 500);
+		fenetre.setSize(300, 600);
 		fenetre.setResizable(false);
 		panel = new JPanel();
 		fenetre.setContentPane(panel);
 		ImageIcon imageTitre = new ImageIcon("src/images/title.png");
 		JLabel titre = new JLabel("", imageTitre, JLabel.CENTER);
 		ImageIcon image = new ImageIcon("src/images/background.jpeg");
-		ImageIcon b1 = new ImageIcon("src/images/b1.png");
-		ImageIcon b2 = new ImageIcon("src/images/b2.png");
-		ImageIcon b3 = new ImageIcon("src/images/b3.png");
-		ImageIcon b4 = new ImageIcon("src/images/b4.png");
+		ImageIcon b1 = new ImageIcon("src/images/b1.png"); // REMPLACER PAR UN BOUTON JOUEUR VS JOUEUR
+		ImageIcon b2 = new ImageIcon("src/images/b2.png"); // REMPLACER PAR UN BOUTON JOUEUR VS IA
+		ImageIcon b3 = new ImageIcon("src/images/b2.png"); // REMPLACER PAR UN BOUTON IA VS JOUEUR
+		ImageIcon b4 = new ImageIcon("src/images/b3.png"); 
+		ImageIcon b5 = new ImageIcon("src/images/b4.png");
 		menuItem = new JLabel("", b1, JLabel.CENTER);
 		menuItem2 = new JLabel("", b2, JLabel.CENTER);
 		menuItem3 = new JLabel("", b3, JLabel.CENTER);
 		menuItem4 = new JLabel("", b4, JLabel.CENTER);
+		menuItem5 = new JLabel("", b5, JLabel.CENTER);
 	    JLabel label = new JLabel("", image, JLabel.CENTER);
 		fenetre.add(label, BorderLayout.CENTER );
 		fenetre.add(titre);	
@@ -64,6 +67,7 @@ public class Launcher{
 		fenetre.add(menuItem2);
 		fenetre.add(menuItem3);
 		fenetre.add(menuItem4);
+		fenetre.add(menuItem5);
 		fenetre.add(quit);
 		fenetre.setVisible(true);	
 		label.setBounds(0,0 ,300, 200);
@@ -72,7 +76,8 @@ public class Launcher{
 		menuItem2.setBounds(45,300,200,30);
 		menuItem3.setBounds(45,350,200,30);
 		menuItem4.setBounds(45,400,200,30);
-		quit.setBounds(120,450,50,20);
+		menuItem5.setBounds(45,450,200,30);
+		quit.setBounds(120,500,50,20);
 		menuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -85,8 +90,8 @@ public class Launcher{
 		menuItem2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	GameBiparti g = new GameBiparti(true,false); 
-				g.init(true, false);
+            	GameBiparti g = new GameBiparti(false,true); 
+				g.init(false, true);
 				g.render();
             }
 
@@ -95,8 +100,8 @@ public class Launcher{
 		menuItem3.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	Game g = new GameAlice(); 
-				g.init();
+            	GameBiparti g = new GameBiparti(true,false); 
+				g.init(true, false);
 				g.render();
             }
 
@@ -105,7 +110,16 @@ public class Launcher{
 		menuItem4.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	Game g = new GameBob(); 
+            	GameAlice g = new GameAlice(); 
+				g.init();
+				g.render();
+            }
+
+        });
+		menuItem5.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	GameBob g = new GameBob(); 
 				g.init();
 				g.render();
             }

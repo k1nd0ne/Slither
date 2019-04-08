@@ -16,7 +16,6 @@ public class Joueur {
 	}
 	
 	public Sommet play(ArrayList<Sommet> SommetsAccessible,Sommet sommetCourant) {
-		System.out.println("je suis dans joueur");
 		return null;
 	}
 	

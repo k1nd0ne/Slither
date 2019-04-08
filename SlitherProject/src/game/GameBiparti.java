@@ -8,7 +8,7 @@ public class GameBiparti extends Game{
 
 	public GameBiparti(boolean iaj1, boolean iaj2) {
 		
-		this.g = new GrapheBiparti(5,5);
+		this.g = new GrapheBiparti(7,7);
 		if(iaj1) {
 			this.joueurCourant = new IA("Bob", (GrapheBiparti) this.g);
 		}
@@ -21,8 +21,6 @@ public class GameBiparti extends Game{
 		else {
 			this.adversaire = new Joueur("Alice");
 		}
-		System.out.println("Classe de Bob : " + joueurCourant.getClass().getCanonicalName());
-		System.out.println("Classe de Alice : " + adversaire.getClass().getCanonicalName());
 	}
 	public void init(boolean iaj1, boolean iaj2) {
 		super.initBis();

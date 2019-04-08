@@ -60,7 +60,6 @@ public class Sommet {
 		Sommet sVu = new Sommet(40,60);
 		sVu.setVu();
 		Sommet sAcc = new Sommet(40,80);
-		System.out.println((s.getDejaVu() == !sVu.getDejaVu()));
 		ArrayList<Sommet> sommetsAccessibles = new ArrayList<Sommet>();
 		sommetsAccessibles.add(sAcc);
 		

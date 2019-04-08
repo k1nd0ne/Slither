@@ -105,7 +105,6 @@ public class Game implements MouseListener{
 		});
 	}
 	public void play() {
-		System.out.println("Le joueur : " + joueurCourant + " de type " + joueurCourant.getClass().getCanonicalName());
 		Sommet s = joueurCourant.play(g.getSommetsAccessibles(), g.getSommetCourant());
 		if(s != null) {
 			g.setSommetCourant(s);
@@ -147,7 +146,6 @@ public class Game implements MouseListener{
 	}
 	public static void main(String[] args) {
 		Game g = new Game();
-		g.render();     
-		System.out.println("jeu fini");
+		g.render();
 	}
 }

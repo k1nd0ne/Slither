@@ -1,6 +1,7 @@
 package launcher;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -26,11 +27,17 @@ public class Launcher{
 	private JLabel menuItem4;
 	private JLabel menuItem5;
 	private JButton quit;
+	private JButton quit2;
+	private JButton authors;
 	private JFrame fenetre;  
 	private JPanel panel; 
+	private JPanel authPan;
+	private JFrame authFen;
 	public Launcher() {
 		
+		quit2 = new JButton("Quitter");
 		quit = new JButton("Quitter");
+		authors = new JButton("Auteurs");
 		
 		quit.addActionListener(new ActionListener() {
 			@Override
@@ -39,22 +46,49 @@ public class Launcher{
 				System.exit(0);
 			}
 		});
-
+		
+		quit2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				authFen.setVisible(false);
+			}
+		});
 		
 		
+		//INITIALISATION FENETRE AUTEURS.
+		authFen = new JFrame("Auteurs");
+		authFen.setSize(500, 300);
+		authFen.setResizable(false);
+		authPan = new JPanel();
+		JLabel authorItem = new JLabel("Slither Game Version 1.0");
+		JLabel authorItem2 = new JLabel("----Développement----");
+		JLabel authorItem3 = new JLabel("Félix GUYARD");
+		JLabel authorItem4 = new JLabel("Lucas PICASARRI-ARIETA");
+		JLabel authorItem5 = new JLabel("Boris MARCELLIN");
+		authFen.setContentPane(authPan);
+		authFen.add(quit2);
+		authFen.add(authorItem);
+		authFen.add(authorItem2);
+		authFen.add(authorItem3);
+		authFen.add(authorItem4);
+		authFen.add(authorItem5);		
+		
+		
+		//INITIALISATION FENETRE PRINCIPALE
 		fenetre = new JFrame("Menu principal");
-		fenetre.setSize(300, 600);
+		fenetre.setSize(500, 650);
 		fenetre.setResizable(false);
 		panel = new JPanel();
+		panel.setBackground(Color.darkGray);
+		
 		fenetre.setContentPane(panel);
 		ImageIcon imageTitre = new ImageIcon("src/images/title.png");
 		JLabel titre = new JLabel("", imageTitre, JLabel.CENTER);
 		ImageIcon image = new ImageIcon("src/images/background.jpeg");
-		ImageIcon b1 = new ImageIcon("src/images/b1.png"); // REMPLACER PAR UN BOUTON JOUEUR VS JOUEUR
-		ImageIcon b2 = new ImageIcon("src/images/b2.png"); // REMPLACER PAR UN BOUTON JOUEUR VS IA
-		ImageIcon b3 = new ImageIcon("src/images/b2.png"); // REMPLACER PAR UN BOUTON IA VS JOUEUR
-		ImageIcon b4 = new ImageIcon("src/images/b3.png"); 
-		ImageIcon b5 = new ImageIcon("src/images/b4.png");
+		ImageIcon b1 = new ImageIcon("src/images/b1.png"); 
+		ImageIcon b2 = new ImageIcon("src/images/b2.png");  
+		ImageIcon b3 = new ImageIcon("src/images/b3.png");
+		ImageIcon b4 = new ImageIcon("src/images/b4.png"); 
+		ImageIcon b5 = new ImageIcon("src/images/b5.png");
 		menuItem = new JLabel("", b1, JLabel.CENTER);
 		menuItem2 = new JLabel("", b2, JLabel.CENTER);
 		menuItem3 = new JLabel("", b3, JLabel.CENTER);
@@ -69,15 +103,21 @@ public class Launcher{
 		fenetre.add(menuItem4);
 		fenetre.add(menuItem5);
 		fenetre.add(quit);
+		fenetre.add(authors);
 		fenetre.setVisible(true);	
-		label.setBounds(0,0 ,300, 200);
-		titre.setBounds(0,200 ,300, 30);
-		menuItem.setBounds(40,250,200,30);
-		menuItem2.setBounds(45,300,200,30);
-		menuItem3.setBounds(45,350,200,30);
-		menuItem4.setBounds(45,400,200,30);
-		menuItem5.setBounds(45,450,200,30);
-		quit.setBounds(120,500,50,20);
+		
+		
+		//INITIALISATION DES POSITIONS
+		label.setBounds(0,0 ,500, 200);
+		titre.setBounds(0,200 ,500, 30);
+		menuItem.setBounds(120,250,260,40);
+		menuItem2.setBounds(100,320,300,40);
+		menuItem3.setBounds(100,390,300,40);
+		menuItem4.setBounds(135,460,230,40);
+		menuItem5.setBounds(135,530,230,40);
+		quit.setBounds(225,600,70,20);
+		quit2.setBounds(225,200,70,20);
+		authors.setBounds(425, 605, 70, 20);
 		menuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -126,6 +166,16 @@ public class Launcher{
 
         });
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		authors.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				authFen.setVisible(true);
+				
+			}
+			
+		});
 		
 
 		

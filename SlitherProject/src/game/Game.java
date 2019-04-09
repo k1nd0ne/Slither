@@ -24,7 +24,7 @@ public class Game implements MouseListener{
 	protected JPanelGraphe pan;
 	private JButton forceBased;
 	private Graphics gt;
-	public Game() {
+	public Game(){
 		this.g = new Graphe(20);
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
@@ -34,9 +34,11 @@ public class Game implements MouseListener{
 		forceBased = new JButton("Appliquer Force-Based");
 		forceBased.setBounds(10, 500, 200, 30);
 		fenetre = new JFrame();
+		fenetre.setBackground(Color.white);
 		fenetre.setSize(600,600);
 		fenetre.setResizable(false);
 		pan = new JPanelGraphe(g,joueurCourant,forceBased);
+		pan.setBackground(Color.WHITE);
 		fenetre.setContentPane(pan);
 		fenetre.setVisible(true);
 		gt = pan.getGraphics();
@@ -50,7 +52,7 @@ public class Game implements MouseListener{
 			}
 		});
 	}
-	public void init() {		
+	public void init() {	
 		initBis();
 		play();
 	}

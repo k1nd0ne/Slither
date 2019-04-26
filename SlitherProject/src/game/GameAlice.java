@@ -4,7 +4,7 @@ import graphe.GrapheGagnantAlice;
 
 public class GameAlice extends Game {
 		public GameAlice() {
-			this.g = new GrapheGagnantAlice(18);
+			this.g = new GrapheGagnantAlice(10);
 		}
 
 

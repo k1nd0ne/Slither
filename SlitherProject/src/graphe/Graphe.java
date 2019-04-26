@@ -225,6 +225,9 @@ public class Graphe{
 			deplacement.get(i).add(0.);
 		}
 		do {
+			if(etape%10 == 0) {
+				this.echanger(600,600);
+			}
 			this.deplacer(deplacement);
 			for(int i=0; i<n; i++) {
 				deplacement.get(i).set(0, 0.);
@@ -260,9 +263,23 @@ public class Graphe{
 				deplacement.get(i).set(1, deplacement.get(i).get(1)*0.8);
 			}
 			etape++;
-		}while (!norme(deplacement,normeMin) && etape < 1000);
+		}while (!norme(deplacement,normeMin) && etape < 10000);
 	}
+	/**
+	   * Echanger deux sommet dans un graphe
+	   * Utilisé pour le forcebased
+	**/
+	private void echanger(int height,int width) {
+		Random r = new Random();
+		int x = r.nextInt(height - 100);
+		int y = r.nextInt(width - 100);
+		int i = r.nextInt(sommets.size());
 	
+		sommets.get(i).setX(x);
+		sommets.get(i).setY(y);
+			
+		
+	}
 	private double distance(Sommet sommet, Sommet sommet2) {
 		double x1 = sommet.getX(); 
 		double x2 = sommet2.getX();
@@ -273,7 +290,7 @@ public class Graphe{
 	}
 	
 	public void afficherCouplage(Graphics gt) {
-		// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
 		
 	}
 }

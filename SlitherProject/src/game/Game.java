@@ -26,7 +26,7 @@ public class Game implements MouseListener{
 	private Graphics gt;
 	
 	public Game(){
-		this.g = new Graphe(20);
+		this.g = new Graphe(10);
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
 	}

@@ -11,7 +11,12 @@ public class Couplage {
 	
 	}
 	
-	
+	/**
+	   * Verifie si un sommet est exposé.
+	   * On parcours pour cela chaque arête du couplage.
+	   * @param s : Le sommet à vérifier
+	   * @return boolean vrais si s est exposé, faux sinon.
+	   */
 	public boolean estexpose (Sommet s) {
 		for(Arc a : coupl) {
 			if(a.getS1()==s || a.getS2()==s) {
@@ -21,6 +26,11 @@ public class Couplage {
 		return true;
 		
 	}
+	/**
+	   * Augemente le couplage précédent d'un nouvel arc.
+	   * @param s : Une liste d'arcs
+	   * @return void.
+	   */
 	public void augmenter(Set<Arc> s) {
 		Set<Arc> res = new HashSet<Arc>();
 		for(Arc a : coupl) {
@@ -36,6 +46,11 @@ public class Couplage {
 		}		
 		coupl=res;
 	}
+	/**
+	   * Récupère le voisin d'un sommmet.
+	   * @param s : Un sommet. 
+	   * @return a : Arc contenant le sommet voisin de s.
+	   */
 	public Arc getVoisin(Sommet s) {
 		for(Arc a : coupl) {
 			if(a.getS1() == s) {

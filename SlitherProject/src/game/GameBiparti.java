@@ -5,7 +5,12 @@ import joueur.IA;
 import joueur.Joueur;
 
 public class GameBiparti extends Game{
-
+	/**
+	   * Création des joueurs pour une partie contre une IA ou un humain
+	   * @param iaj1 : Boolean
+	   * @param iaj2 : Boolean
+	   * 
+	   */
 	public GameBiparti(boolean iaj1, boolean iaj2) {
 		
 		this.g = new GrapheBiparti(7,7);
@@ -22,6 +27,7 @@ public class GameBiparti extends Game{
 			this.adversaire = new Joueur("Alice");
 		}
 	}
+	
 	public void init(boolean iaj1, boolean iaj2) {
 		super.initBis();
 		if(iaj1) {

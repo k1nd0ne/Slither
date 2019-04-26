@@ -33,10 +33,12 @@ public class Launcher{
 	private JPanel panel; 
 	private JPanel authPan;
 	private JFrame authFen;
+	
+	
 	public Launcher() {
 		
-		quit2 = new JButton("Quitter");
 		quit = new JButton("Quitter");
+		quit2 = new JButton("Fermer");
 		authors = new JButton("Auteurs");
 		
 		quit.addActionListener(new ActionListener() {
@@ -59,18 +61,20 @@ public class Launcher{
 		authFen.setSize(500, 300);
 		authFen.setResizable(false);
 		authPan = new JPanel();
+		authFen.setContentPane(authPan);
+		
 		JLabel authorItem = new JLabel("Slither Game Version 1.0");
 		JLabel authorItem2 = new JLabel("----Développement----");
 		JLabel authorItem3 = new JLabel("Félix GUYARD");
 		JLabel authorItem4 = new JLabel("Lucas PICASARRI-ARIETA");
 		JLabel authorItem5 = new JLabel("Boris MARCELLIN");
-		authFen.setContentPane(authPan);
-		authFen.add(quit2);
+		
 		authFen.add(authorItem);
 		authFen.add(authorItem2);
 		authFen.add(authorItem3);
 		authFen.add(authorItem4);
-		authFen.add(authorItem5);		
+		authFen.add(authorItem5);
+		authFen.add(quit2);
 		
 		
 		//INITIALISATION FENETRE PRINCIPALE
@@ -79,7 +83,6 @@ public class Launcher{
 		fenetre.setResizable(false);
 		panel = new JPanel();
 		panel.setBackground(Color.darkGray);
-		
 		fenetre.setContentPane(panel);
 		ImageIcon imageTitre = new ImageIcon("src/images/title.png");
 		JLabel titre = new JLabel("", imageTitre, JLabel.CENTER);
@@ -116,7 +119,7 @@ public class Launcher{
 		menuItem4.setBounds(135,460,230,40);
 		menuItem5.setBounds(135,530,230,40);
 		quit.setBounds(225,600,70,20);
-		quit2.setBounds(225,200,70,20);
+		quit2.setBounds(100,100,100,100);
 		authors.setBounds(425, 605, 70, 20);
 		menuItem.addMouseListener(new MouseAdapter() {
             @Override
@@ -177,9 +180,7 @@ public class Launcher{
 			
 		});
 		
-
-		
-		}
+	}
 	
 	public static void main(String args[]) {
 		Launcher l = new Launcher();

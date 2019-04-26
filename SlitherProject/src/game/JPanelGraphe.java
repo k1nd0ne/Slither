@@ -14,6 +14,7 @@ public class JPanelGraphe extends JPanel {
 	private Graphe g;
 	private Joueur j;
 	private JButton b;
+	
 	JPanelGraphe(Graphe g,Joueur j,JButton f){
 		super();
 		this.g = g;

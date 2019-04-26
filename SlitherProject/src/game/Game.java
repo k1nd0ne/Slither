@@ -24,12 +24,16 @@ public class Game implements MouseListener{
 	protected JPanelGraphe pan;
 	private JButton forceBased;
 	private Graphics gt;
+	
 	public Game(){
 		this.g = new Graphe(20);
 		this.joueurCourant = new Joueur("Bob");
 		this.adversaire = new Joueur("Alice");
 	}
-	
+	/**
+	   * Initialisation de la fenêtre de jeux avant le lancement de la partie
+	   * Mise en place des actions pour l'utilisateurs joueur
+	   */
 	public void initBis() {
 		forceBased = new JButton("Appliquer Force-Based");
 		forceBased.setBounds(10, 500, 200, 30);
@@ -52,23 +56,39 @@ public class Game implements MouseListener{
 			}
 		});
 	}
+	/**
+	   * Appel de la méthode précédente.
+	   * Lancement de la partie.
+	   */
 	public void init() {	
 		initBis();
 		play();
 	}
-	
+	/**
+	   * Mettre à jour les composant graphique.
+	   * Utilisé lors de l'application de l'algorithme forceBased
+	   */
 	public void refresh() {
 		forceBased.setVisible(false);
 		pan.updateUI();
 		pan.update(gt);
 	}
 	
-
+	/**
+	   * Affiche le graphe pour une partie.
+	   * Affiche le joueurs courant qui doit effectuer une action
+	   */
 	public void render() {
 		g.render(gt);
 		joueurCourant.render(gt);
 	}
-	@Override
+	
+	/**
+	   * Si un joueur clique correctement sur le graphe
+	   * Alors il a effectuer sont tour de jeu.
+	   * On met à jour les informations sur le joueur courant en vérifiant que la partie n'est pas terminée
+	   * @param e : Un clic sur la fenetre de jeu
+	   */
 	public void mouseClicked(MouseEvent e) {
 		
 		boolean correctlyClicked = g.gstMouseEvent(e);
@@ -89,6 +109,12 @@ public class Game implements MouseListener{
 			}
 		}
 	}
+	/**
+	   * Gestionnaire de fin de partie
+	   * Affiche le nom du joueur gagnant
+	   * Affiche les arêtes du couplage maximum.
+	   * Permetre au joueur de quitter la partie
+	   */
 	public void gstEnd() {
 		g.afficherCouplage(gt);
 		String gagnant = adversaire.getNom();
@@ -106,6 +132,10 @@ public class Game implements MouseListener{
 			}
 		});
 	}
+	/**
+	   * Effectue un simple tour de jeux pour un joueur ou un robot.
+	   * Vérfication de l'état de la partie à chaque tour.
+	   */
 	public void play() {
 		Sommet s = joueurCourant.play(g.getSommetsAccessibles(), g.getSommetCourant());
 		if(s != null) {

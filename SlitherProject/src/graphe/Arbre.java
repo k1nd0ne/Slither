@@ -10,22 +10,20 @@ public class Arbre {
 	protected Sommet scourant;
 	protected ArrayList<Arbre> fils;
 	
-	public String toString() {
-		return toString(0);
-	}
-	public String toString(int niveau) {
-		String res =  niveau + " : " + scourant;
-		for(Arbre f : fils ) {
-			res += "\t"+ f.toString(niveau + 1);
-		}
-		return res;
-	}
+	/**
+	   * Initialisation d'un arbre
+	   * @param ao : Le premier sommet de l'arbre
+	   */
 	public Arbre(Sommet ao) {
 		verspere = null;
 		scourant = ao;
 		fils = new ArrayList<Arbre>();
 		
 	}
+	/**
+	   * Récupère tous les sommets de l'arbre 
+	   * @return res : La liste des sommets de l'arbre.
+	   */
 	public Set<Sommet> getA(){
 		Set<Sommet> res = new HashSet<Sommet>();
 		res.add(scourant);
@@ -34,6 +32,7 @@ public class Arbre {
 		}
 		return res;		
 	}
+	
 	public Set<Sommet> getB(){
 		Set<Sommet> res = new HashSet<Sommet>();
 		for(Arbre a : fils) {
@@ -41,6 +40,11 @@ public class Arbre {
 		}
 		return res;		
 	}
+	/**
+	   * Ajoute une branche à l' arbre
+	   * @param b : Un sommet.
+	   * @param ab : Un arc 
+	   */
 	public void add(Sommet b, Arc ab ) {
 		Sommet a = ab.getS1();
 		if(a==b) {
@@ -57,6 +61,11 @@ public class Arbre {
 			}
 		}			
 	}
+	/**
+	   * Recupère le chemin issus d'un sommet
+	   * @param b : Un sommet.
+	   * @return res : L'ensemble du chemin
+	   */
 	public Set<Arc> chemin(Sommet b){
 		Set<Arc> res = new HashSet<Arc>();
 		if (scourant == b ) {
@@ -71,5 +80,16 @@ public class Arbre {
 			}		
 		}
 		return res;	
+	}
+	
+	public String toString(int niveau) {
+		String res =  niveau + " : " + scourant;
+		for(Arbre f : fils ) {
+			res += "\t"+ f.toString(niveau + 1);
+		}
+		return res;
+	}
+	public String toString() {
+		return toString(0);
 	}
 }

@@ -13,15 +13,31 @@ public class Arc {
 		this.s2 = s2;
 		this.dejaVu = false;
 	}
+	/**
+	   * Passe la valeur d'un sommet non vu à vrai.
+	   */
 	public void setVu() {
 		this.dejaVu = true;
 	}
+	/**
+	   * Récupère Le premier sommet d'un arc
+	   * @return s1 : le premier sommet de l'arc courant.
+	   */
 	public Sommet getS1() {
 		return s1;
 	}
+	/**
+	   * Récupère Le premier sommet d'un arc
+	   * @return s2 : le second sommet de l'arc courant.
+	   */
 	public Sommet getS2() {
 		return s2;
 	}
+	/**
+	   * Tracer les arcs et les affichers graphiquement.
+	   * Utiliser des couleurs différentes selon l'état des sommets.
+	   * @param g :Outil de dessin
+	   */
 	public void render(Graphics g) {
 		if(dejaVu) {
 			g.setColor(Color.RED);
@@ -31,34 +47,15 @@ public class Arc {
 		}
 		g.drawLine(s1.getX(), s1.getY(), s2.getX(), s2.getY());
 	}
+	
 	public String toString() {
 		return "[" + s1.toString() + " ; " + s2.toString() + " ]";
 	}
-	public static void main(String[] args) {
-		Sommet s = new Sommet(40,40);
-		Sommet sVu = new Sommet(40,60);
-		sVu.setVu();
-		Sommet sAcc = new Sommet(40,80);
-		sAcc.setVu();
-		Arc a1 = new Arc (s,sVu);
-		Arc a2 = new Arc(sVu, sAcc);
-		
-		
-		JFrame fenetre = new JFrame();
-		fenetre.setSize(500,500);
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel pan = new JPanel();
-		pan.setBackground(Color.WHITE);
-		fenetre.setContentPane(pan);
-		
-		fenetre.setVisible(true);
-		Graphics g = pan.getGraphics();
-		while(true) {
-			a1.render(g);
-			a2.render(g);
-		}
-	}
+	/**
+	   * Utilisé pour dessiner les arêtes du couplage en fin de jeux
+	   * repasse en vert une arête.
+	   * @param g : Outil de dessin.
+	   */
 	public void paint(Graphics g) {
 		g.setColor(Color.GREEN);
 		g.drawLine(s1.getX(), s1.getY(), s2.getX(), s2.getY());

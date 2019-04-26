@@ -14,15 +14,27 @@ public class Graphe{
 	protected ArrayList<Arc> arcs;
 	protected Sommet sommetCourant;
 	protected int nbSommet;
+	/**
+	   * Initialisation du graphe
+	   * @param nbSommet : le nombre de sommet du graphe
+	   */
 	public Graphe(int nbSommet) {
 		this.nbSommet = nbSommet; 
 		sommets = new ArrayList<Sommet>();
 		arcs = new ArrayList<Arc>();
 		sommetCourant = null;
 	}
+	/**
+	   * Ajout d'un sommet au graphe
+	   * @param s : le sommet à ajouter
+	   */
 	public void addS(Sommet s) {
 		sommets.add(s);
 	}
+	/**
+	   * Ajout d'un arc au graphe
+	   * @param a : L'arc à ajouter
+	   */
 	public void addA(Arc a) {
 		arcs.add(a);
 	}
@@ -37,9 +49,17 @@ public class Graphe{
 		this.sommetCourant = s;
 		s.setVu();
 	}
+	/**
+	   * Récupérer le sommets courant du graphe
+	   * cad le dernier sommet joué par un joueur.
+	   */
 	public Sommet getSommetCourant() {
 		return this.sommetCourant;
 	}
+	/**
+	   * Récuperation des sommets accessible depuis le sommets courant
+	   * cad tous les sommets jouables.
+	   */
 	public ArrayList<Sommet> getSommetsAccessibles(){
 		ArrayList<Sommet> res = new ArrayList<Sommet>();
 		if(sommetCourant == null) {
@@ -58,6 +78,10 @@ public class Graphe{
 			return res;
 		}
 	}
+	/**
+	   * On vérifie si le graphe est fermer
+	   * cad qu'il n'y a plus de sommets accessibles.
+	   */
 	public boolean estFerme() {
 		return getSommetsAccessibles().isEmpty();
 	}
@@ -91,7 +115,10 @@ public class Graphe{
 			return false;
 		}
 	}
-	
+	/**
+	   * TODO
+	   * @param s : le sommet à ajouter
+	   */
 	protected void randomizeSommets(int width, int height){
 		Random r = new Random();
 		for(int i=0;i<nbSommet;i++) {
@@ -179,6 +206,14 @@ public class Graphe{
 		}
 		
 	}
+	/**
+	   * Implementation de l'algorithme forceBased.
+	   * Le but est de transformer un graphe désordonné afin d'éviter un maximum les croisements entre arêtes
+	   * @param k
+	   * @param r
+	   * @param normeMin
+	   * @param l0
+	   */
 	public void forceBased(double k, double r,double normeMin, double l0) {
 		int etape = 0;
 		int n = sommets.size();
@@ -236,26 +271,7 @@ public class Graphe{
 		
 		return Math.sqrt((Math.pow(x2 - x1, 2) + Math.pow(y2 - y1,2)));
 	}
-	public static void main(String[] args) {
-		Graphe g = new Graphe(10);
-		JFrame fenetre = new JFrame();
-		fenetre.setSize(500,500);
-		Sommet s1 = new Sommet(100,100);
-		g.addS(s1);
-		Sommet s2 = new Sommet(400,400);
-		g.addS(s2);
-		g.addA(new Arc(s1,s2));
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JPanel pan = new JPanel();
-		pan.setBackground(Color.WHITE);
-		fenetre.setContentPane(pan);
-		fenetre.setVisible(true);
-		Graphics gt = pan.getGraphics();
-			g.forceBased(2000, 0.3, 20, 10);
-		while(true)
-		g.render(gt);
-	}
+	
 	public void afficherCouplage(Graphics gt) {
 		// TODO Auto-generated method stub
 		
